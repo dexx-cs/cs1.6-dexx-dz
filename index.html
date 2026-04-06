@@ -15,27 +15,24 @@ body {
   color: white;
   text-align: center;
   overflow-x: hidden;
+
+  background: url("bg.jpg") no-repeat center center fixed;
+  background-size: cover;
 }
 
-/* 🎥 فيديو خلفية */
-#bgVideo {
+/* Overlay غامق */
+body::before {
+  content: "";
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  z-index: -2;
+  background: rgba(0,0,0,0.7);
+  z-index: -1;
 }
 
-/* غطاء */
-.overlay {
-  background: rgba(0,0,0,0.6);
-  min-height: 100vh;
-  padding-top: 40px;
-}
-
-/* عنوان */
+/* العنوان */
 h1 {
   font-size: 40px;
   color: #00ffcc;
@@ -89,7 +86,7 @@ h1 {
   background: darkred;
 }
 
-/* أنيميشن دخول */
+/* أنيميشن */
 .fade {
   animation: fadeIn 2s ease;
 }
@@ -104,17 +101,10 @@ h1 {
 
 <body>
 
-<!-- 🎥 فيديو -->
-<video autoplay muted loop id="bgVideo">
-  <source src="https://cdn.coverr.co/videos/coverr-gaming-room-5179/1080p.mp4" type="video/mp4">
-</video>
-
-<!-- 🔊 صوت -->
+<!-- صوت -->
 <audio autoplay>
   <source src="https://www.myinstants.com/media/sounds/csgo-start.mp3">
 </audio>
-
-<div class="overlay">
 
 <h1>🔥 CS 1.6 DZ 🔥</h1>
 
@@ -154,8 +144,6 @@ h1 {
 <a class="btn" href="https://discord.gg/ya9inx" target="_blank">
 <i class="fab fa-discord"></i> Discord
 </a>
-
-</div>
 
 </div>
 
