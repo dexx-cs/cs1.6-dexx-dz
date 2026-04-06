@@ -4,68 +4,89 @@
 <meta charset="UTF-8">
 <title>CS 1.6 DZ</title>
 
+<!-- Icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
 <style>
 body {
     margin: 0;
     font-family: Arial;
+    background: url("https://images.unsplash.com/photo-1542751371-adc38448a05e") no-repeat center/cover;
     color: white;
     text-align: center;
-    background: url("https://images.unsplash.com/photo-1605902711622-cfb43c4437d1") no-repeat center/cover;
 }
 
-/* تأثير غامق */
+/* overlay */
 .overlay {
-    background: rgba(0,0,0,0.7);
+    background: rgba(0,0,0,0.75);
     min-height: 100vh;
-    padding-top: 50px;
+    padding: 40px 0;
 }
 
-/* العنوان */
+/* title animation */
 h1 {
-    font-size: 50px;
     color: #00ffd5;
-    text-shadow: 0 0 20px #00ffd5;
+    font-size: 45px;
+    animation: glow 1.5s infinite alternate;
 }
 
-/* الكارد */
+@keyframes glow {
+    from { text-shadow: 0 0 10px #00ffd5; }
+    to { text-shadow: 0 0 30px #00ffd5; }
+}
+
+/* cards */
 .card {
     background: rgba(255,255,255,0.1);
     backdrop-filter: blur(10px);
-    margin: 30px auto;
+    width: 320px;
+    margin: 25px auto;
     padding: 20px;
-    width: 300px;
     border-radius: 15px;
-    box-shadow: 0 0 15px #00ffd5;
-    transition: 0.3s;
+    box-shadow: 0 0 20px #00ffd5;
+    animation: fadeUp 1s ease;
 }
 
-.card:hover {
-    transform: scale(1.05);
+@keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
-/* الأزرار */
+/* buttons */
 .btn {
     display: block;
-    margin: 15px auto;
+    margin: 12px auto;
     padding: 12px;
     width: 80%;
     border-radius: 10px;
-    background: linear-gradient(45deg,#00ffd5,#00aaff);
-    color: black;
     text-decoration: none;
     font-weight: bold;
     transition: 0.3s;
 }
 
-.btn:hover {
-    background: white;
-    transform: scale(1.1);
-}
-
-/* زر join */
+/* join button */
 .join {
     background: red;
     color: white;
+}
+
+.join:hover {
+    transform: scale(1.1);
+}
+
+/* social buttons */
+.insta {
+    background: linear-gradient(45deg,#ff00cc,#ff6600);
+    color: white;
+}
+
+.discord {
+    background: #5865F2;
+    color: white;
+}
+
+.btn:hover {
+    transform: scale(1.05);
 }
 </style>
 </head>
@@ -82,17 +103,24 @@ h1 {
 </div>
 
 <div class="card">
-<h2>🖥️ IP Server</h2>
+<h2><i class="fa-solid fa-desktop"></i> IP Server</h2>
 <p>connect 94.23.78.29:27020</p>
 
-<a class="btn join" href="steam://connect/94.23.78.29:27020">🔥 Join Server</a
+<a class="btn join" href="steam://connect/94.23.78.29:27020">
+🔥 Join Server
+</a>
 </div>
 
 <div class="card">
-<h2>📱 تواصل معنا</h2>
+<h2><i class="fa-solid fa-mobile"></i> تواصل معنا</h2>
 
-<a class="btn" href="https://instagram.com/ya9inx" target="_blank">Instagram</a>
-<a class="btn" href="https://discord.gg/ya9inx" target="_blank">Discord</a>
+<a class="btn insta" href="https://instagram.com/ya9inx" target="_blank">
+<i class="fa-brands fa-instagram"></i> Instagram
+</a>
+
+<a class="btn discord" href="https://discord.gg/xxxxx" target="_blank">
+<i class="fa-brands fa-discord"></i> Discord
+</a>
 
 </div>
 
