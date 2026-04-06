@@ -4,71 +4,66 @@
 <meta charset="UTF-8">
 <title>CS 1.6 DZ</title>
 
-<!-- Icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
 <style>
 body {
     margin: 0;
     font-family: Arial;
-    background: url("https://images.unsplash.com/photo-1542751371-adc38448a05e") no-repeat center/cover;
     color: white;
     text-align: center;
+    overflow-x: hidden;
 }
 
-/* LOADING */
-#loader {
+/* VIDEO BACKGROUND */
+video {
     position: fixed;
     width: 100%;
     height: 100%;
-    background: black;
-    color: #00ffd5;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 9999;
-    font-size: 30px;
+    object-fit: cover;
+    z-index: -1;
 }
 
-.fade-out {
-    opacity: 0;
-    transition: 1s;
+/* NAVBAR */
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background: rgba(0,0,0,0.8);
+    padding: 10px;
+    color: #00ffe1;
+    font-weight: bold;
+    z-index: 1000;
 }
 
 /* overlay */
 .overlay {
-    background: rgba(0,0,0,0.75);
+    background: rgba(0,0,0,0.7);
     min-height: 100vh;
-    padding: 40px 0;
+    padding-top: 70px;
 }
 
 /* title */
 h1 {
-    color: #00ffd5;
     font-size: 45px;
-    animation: glow 1.5s infinite alternate;
-}
-
-@keyframes glow {
-    from { text-shadow: 0 0 10px #00ffd5; }
-    to { text-shadow: 0 0 30px #00ffd5; }
+    color: #00ffe1;
+    text-shadow: 0 0 20px #00ffe1;
 }
 
 /* cards */
 .card {
-    background: rgba(255,255,255,0.1);
-    backdrop-filter: blur(10px);
-    width: 320px;
+    background: rgba(255,255,255,0.08);
+    backdrop-filter: blur(15px);
     margin: 25px auto;
-    padding: 20px;
-    border-radius: 15px;
-    box-shadow: 0 0 20px #00ffd5;
-    animation: fadeUp 1s ease;
+    padding: 25px;
+    width: 320px;
+    border-radius: 20px;
+    box-shadow: 0 0 25px #00ffe1;
+    transition: 0.5s;
+    opacity: 0;
+    transform: translateY(50px);
 }
 
-@keyframes fadeUp {
-    from { opacity: 0; transform: translateY(30px); }
-    to { opacity: 1; transform: translateY(0); }
+.card:hover {
+    transform: scale(1.07);
 }
 
 /* buttons */
@@ -77,7 +72,7 @@ h1 {
     margin: 12px auto;
     padding: 12px;
     width: 80%;
-    border-radius: 10px;
+    border-radius: 12px;
     text-decoration: none;
     font-weight: bold;
     transition: 0.3s;
@@ -85,37 +80,40 @@ h1 {
 
 /* join */
 .join {
-    background: red;
-    color: white;
+    background: linear-gradient(45deg, red, orange);
+    box-shadow: 0 0 20px red;
 }
 
 .join:hover {
-    transform: scale(1.1);
+    transform: scale(1.15);
 }
 
-/* social */
+/* socials */
 .insta {
     background: linear-gradient(45deg,#ff00cc,#ff6600);
-    color: white;
 }
 
 .discord {
     background: #5865F2;
-    color: white;
 }
 
-.btn:hover {
-    transform: scale(1.05);
+/* players */
+.players {
+    margin-top: 10px;
+    color: #00ffe1;
 }
 </style>
 </head>
 
 <body>
 
-<!-- LOADING -->
-<div id="loader">
-  <h1>🔥 CS 1.6 DZ 🔥</h1>
-</div>
+<!-- VIDEO -->
+<video autoplay muted loop>
+<source src="https://cdn.coverr.co/videos/coverr-gaming-keyboard-1605/1080p.mp4">
+</video>
+
+<!-- NAVBAR -->
+<div class="navbar">🔥 CS DZ SERVER</div>
 
 <div class="overlay">
 
@@ -127,47 +125,51 @@ h1 {
 </div>
 
 <div class="card">
-<h2><i class="fa-solid fa-desktop"></i> IP Server</h2>
-<p>connect 94.23.78.29:27020</p>
+<h2>🔥 مميزات السيرفر</h2>
+<p>✔ Headshot Only</p>
+<p>✔ Anti-Cheat قوي</p>
+<p>✔ Ping منخفض</p>
+<p>✔ Admin Active</p>
+</div>
+
+<div class="card">
+<h2>🖥️ IP Server</h2>
+<p id="ip">connect 94.23.78.29:27020</p>
+
+<div class="players" id="players">👥 Players: 0/32</div>
 
 <a class="btn join" href="#" onclick="joinServer()">🔥 Join Server</a>
 </div>
 
 <div class="card">
-<h2><i class="fa-solid fa-mobile"></i> تواصل معنا</h2>
+<h2>📱 تواصل معنا</h2>
 
-<a class="btn insta" href="https://instagram.com/USERNAME" target="_blank">
-<i class="fa-brands fa-instagram"></i> Instagram
-</a>
-
-<a class="btn discord" href="https://discord.gg/xxxxx" target="_blank">
-<i class="fa-brands fa-discord"></i> Discord
-</a>
+<a class="btn insta" id="insta" href="https://instagram.com/ya9inx" target="_blank">Instagram</a>
+<a class="btn discord" id="discord" href="https://discord.gg/ya9inx" target="_blank">Discord</a>
 
 </div>
 
 </div>
 
-<!-- SOUND -->
-<audio autoplay loop>
-  <source src="https://www.myinstants.com/media/sounds/csgo-headshot.mp3">
-</audio>
-
-<!-- SCRIPTS -->
 <script>
-// loading
-window.onload = function() {
-  let loader = document.getElementById("loader");
-  loader.classList.add("fade-out");
-  setTimeout(() => {
-    loader.style.display = "none";
-  }, 1000);
-}
+// animation scroll
+window.addEventListener("scroll", () => {
+  document.querySelectorAll(".card").forEach(card => {
+    card.style.opacity = "1";
+    card.style.transform = "translateY(0)";
+  });
+});
 
-// join + copy
+// fake players
+setInterval(() => {
+  let num = Math.floor(Math.random() * 32);
+  document.getElementById("players").innerText = "👥 Players: " + num + "/32";
+}, 2000);
+
+// join
 function joinServer() {
   navigator.clipboard.writeText("connect 94.23.78.29:27020");
-  alert("IP copied 😎 ادخل للعبة و paste");
+  alert("IP copied 😎");
   window.location.href = "steam://connect/94.23.78.29:27020";
 }
 </script>
