@@ -2,139 +2,125 @@
 <html lang="ar">
 <head>
 <meta charset="UTF-8">
-<title>CS DZ SERVER</title>
+<title>CS 1.6 DZ</title>
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 <style>
 
-body {
-    margin:0;
-    font-family: 'Segoe UI', sans-serif;
-    color:white;
-    overflow:hidden;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
+body {
+    font-family: Arial;
+    color: white;
+
+    /* 🔥 الصورة */
     background: url("car.jpg") no-repeat center center fixed;
     background-size: cover;
 }
 
-/* طبقة سوداء + تأثير */
+/* طبقة تغميق */
 .overlay {
-    background: radial-gradient(circle, rgba(0,0,0,0.6), rgba(0,0,0,0.95));
-    min-height:100vh;
-    padding:40px;
-}
+    min-height: 100vh;
+    width: 100%;
+    background: rgba(0,0,0,0.75);
 
-/* لوقو */
-.logo {
-    font-size:55px;
-    font-weight:bold;
-    color:#00ffe0;
-    text-shadow:0 0 20px #00ffe0, 0 0 40px #00ffe0;
-    animation: neon 2s infinite alternate;
-}
-
-@keyframes neon {
-    from { text-shadow:0 0 10px #00ffe0; }
-    to { text-shadow:0 0 40px #00ffe0; }
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 /* container */
 .container {
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    gap:20px;
+    width: 90%;
+    max-width: 1000px;
+    text-align: center;
 }
 
-/* card glass */
+/* title */
+.title {
+    font-size: 60px;
+    margin-bottom: 30px;
+    color: #00ffc3;
+    text-shadow: 0 0 15px #00ffc3;
+}
+
+/* cards grid */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+/* card */
 .card {
-    width:350px;
-    padding:25px;
-    border-radius:20px;
+    background: rgba(255,255,255,0.07);
+    padding: 25px;
+    border-radius: 15px;
+    backdrop-filter: blur(10px);
 
-    background: rgba(255,255,255,0.05);
-    backdrop-filter: blur(15px);
-
-    box-shadow: 0 0 30px rgba(0,255,200,0.3);
-    transition:0.4s;
+    transition: 0.3s;
 }
 
 .card:hover {
-    transform: translateY(-10px) scale(1.03);
-    box-shadow: 0 0 50px #00ffe0;
+    transform: translateY(-8px);
 }
 
-/* IP */
+/* ip */
 .ip {
-    font-size:18px;
-    color:#00ffe0;
+    margin: 10px 0;
+    color: #00ffc3;
+    font-weight: bold;
 }
 
-/* زر join */
+/* join button */
 .join {
-    margin-top:15px;
-    padding:12px;
-    border-radius:50px;
-    display:block;
-    text-decoration:none;
-    color:white;
-    font-weight:bold;
+    display: inline-block;
+    margin-top: 10px;
+    padding: 12px 20px;
+    border-radius: 30px;
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
 
-    background: linear-gradient(45deg, #ff0000, #ff5e5e);
-    box-shadow:0 0 20px red;
-    transition:0.3s;
+    background: red;
+    transition: 0.3s;
 }
 
 .join:hover {
-    transform: scale(1.1);
-    box-shadow:0 0 40px red;
+    background: darkred;
+    transform: scale(1.05);
 }
 
-/* social */
-.socials {
-    display:flex;
-    gap:10px;
-    justify-content:center;
-}
-
-.social {
-    flex:1;
-    padding:10px;
-    border-radius:30px;
-    text-decoration:none;
-    color:white;
-    font-weight:bold;
-
-    background:#00ffe0;
-    color:black;
-    transition:0.3s;
-}
-
-.social:hover {
-    transform: scale(1.1);
-    background:#00c9a7;
-}
-
-/* مميزات */
+/* features */
 .features p {
-    margin:6px;
+    margin: 5px 0;
 }
 
-/* animation دخول */
-.fade {
-    animation:fadeUp 1s ease;
+/* socials */
+.socials {
+    margin-top: 10px;
 }
 
-@keyframes fadeUp {
-    from {
-        opacity:0;
-        transform: translateY(40px);
-    }
-    to {
-        opacity:1;
-        transform: translateY(0);
-    }
+.socials a {
+    display: inline-block;
+    margin: 5px;
+    padding: 10px 15px;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: bold;
+
+    background: #00ffc3;
+    color: black;
+    transition: 0.3s;
+}
+
+.socials a:hover {
+    background: #00cfa0;
 }
 
 </style>
@@ -146,23 +132,28 @@ body {
 
 <div class="container">
 
-<div class="logo fade">🔥 CS 1.6 DZ 🔥</div>
+<div class="title">🔥 CS 1.6 DZ 🔥</div>
 
-<div class="card fade">
-    <h2>🎮 مرحبا بك</h2>
+<div class="grid">
+
+<!-- welcome -->
+<div class="card">
+    <h2>🎮 مرحبا</h2>
     <p>أفضل سيرفر في الجزائر</p>
 </div>
 
-<div class="card fade">
+<!-- server -->
+<div class="card">
     <h2>💻 Server</h2>
     <div class="ip">94.23.78.29:27020</div>
 
     <a class="join" href="steam://connect/94.23.78.29:27020">
-        🔥 Join Now
+        🔥 Join Server
     </a>
 </div>
 
-<div class="card features fade">
+<!-- features -->
+<div class="card features">
     <h2>🔥 Features</h2>
     <p>✔ Headshot Only</p>
     <p>✔ Anti-Cheat قوي</p>
@@ -170,18 +161,20 @@ body {
     <p>✔ Admin Active</p>
 </div>
 
-<div class="card fade">
+<!-- contact -->
+<div class="card">
     <h2>📱 تواصل</h2>
 
     <div class="socials">
-        <a class="social" href="https://instagram.com/ya9inx" target="_blank">
-            <i class="fab fa-instagram"></i>
+        <a href="https://instagram.com/ya9inx" target="_blank">
+            <i class="fab fa-instagram"></i> Instagram
         </a>
 
-        <a class="social" href="https://discord.gg/ya9inx" target="_blank">
-            <i class="fab fa-discord"></i>
+        <a href="https://discord.gg/ya9inx" target="_blank">
+            <i class="fab fa-discord"></i> Discord
         </a>
     </div>
+</div>
 
 </div>
 
