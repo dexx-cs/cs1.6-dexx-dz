@@ -10,90 +10,84 @@
 <style>
 
 body {
-  margin: 0;
-  font-family: Arial;
-  color: white;
-  text-align: center;
-  overflow-x: hidden;
+    margin: 0;
+    font-family: Arial;
+    color: white;
+    text-align: center;
+    overflow-x: hidden;
 
-  background: url("bg.jpg") no-repeat center center fixed;
-  background-size: cover;
+    /* 🔥 هنا الصورة تاعك */
+    background: url("dz.jpg") no-repeat center center fixed;
+    background-size: cover;
 }
 
-/* Overlay غامق */
-body::before {
-  content: "";
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0,0,0,0.7);
-  z-index: -1;
+/* طبقة تغميق */
+.overlay {
+    background: rgba(0,0,0,0.65);
+    min-height: 100vh;
+    padding: 40px;
 }
 
-/* العنوان */
+/* عنوان */
 h1 {
-  font-size: 40px;
-  color: #00ffcc;
-  text-shadow: 0 0 20px #00ffcc;
-  animation: glow 2s infinite alternate;
+    font-size: 50px;
+    color: #00ffc3;
+    text-shadow: 0 0 20px #00ffc3;
+    animation: glow 2s infinite alternate;
 }
 
 @keyframes glow {
-  from { text-shadow: 0 0 10px #00ffcc; }
-  to { text-shadow: 0 0 30px #00ffcc; }
+    from { text-shadow: 0 0 10px #00ffc3; }
+    to { text-shadow: 0 0 30px #00ffc3; }
 }
 
-/* كارد */
+/* الكارد */
 .card {
-  background: rgba(255,255,255,0.05);
-  backdrop-filter: blur(10px);
-  margin: 20px auto;
-  padding: 20px;
-  width: 300px;
-  border-radius: 15px;
-  box-shadow: 0 0 20px #00ffcc;
-  transition: 0.3s;
+    background: rgba(255,255,255,0.08);
+    margin: 20px auto;
+    padding: 20px;
+    width: 320px;
+    border-radius: 20px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 0 20px rgba(0,255,200,0.4);
+    transition: 0.3s;
 }
 
 .card:hover {
-  transform: scale(1.05);
+    transform: scale(1.05);
 }
 
 /* زر */
 .btn {
-  display: block;
-  margin: 10px auto;
-  padding: 12px;
-  border-radius: 10px;
-  text-decoration: none;
-  color: white;
-  background: #00ffcc;
-  transition: 0.3s;
-}
-
-.btn:hover {
-  background: #00ccaa;
+    display: block;
+    margin: 10px auto;
+    padding: 12px;
+    border-radius: 30px;
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    transition: 0.3s;
 }
 
 /* زر Join */
 .join {
-  background: red;
+    background: #ff3b3b;
+    box-shadow: 0 0 10px red;
 }
 
 .join:hover {
-  background: darkred;
+    background: #ff0000;
+    box-shadow: 0 0 20px red;
 }
 
-/* أنيميشن */
-.fade {
-  animation: fadeIn 2s ease;
+/* أزرار سوشيال */
+.social {
+    background: #00ffc3;
+    color: black;
 }
 
-@keyframes fadeIn {
-  from {opacity: 0; transform: translateY(20px);}
-  to {opacity: 1; transform: translateY(0);}
+.social:hover {
+    background: #00cfa0;
 }
 
 </style>
@@ -101,49 +95,44 @@ h1 {
 
 <body>
 
-<!-- صوت -->
-<audio autoplay>
-  <source src="https://www.myinstants.com/media/sounds/csgo-start.mp3">
-</audio>
+<div class="overlay">
 
 <h1>🔥 CS 1.6 DZ 🔥</h1>
 
-<!-- مرحبا -->
-<div class="card fade">
-<h2>🎮 مرحبا بيكم</h2>
-<p>أفضل سيرفر Counter Strike 1.6</p>
+<div class="card">
+    <h2>🎮 مرحبا بكم</h2>
+    <p>أفضل سيرفر Counter Strike 1.6</p>
 </div>
 
-<!-- IP -->
-<div class="card fade">
-<h2>💻 IP Server</h2>
-<p>connect 94.23.78.29:27020</p>
+<div class="card">
+    <h2>💻 IP Server</h2>
+    <p>connect 94.23.78.29:27020</p>
 
-<a class="btn join" href="steam://connect/94.23.78.29:27020">
-🔥 Join Server
-</a>
+    <!-- 🔥 زر يدخل مباشرة -->
+    <a class="btn join" href="steam://connect/94.23.78.29:27020">
+        🔥 Join Server
+    </a>
 </div>
 
-<!-- مميزات -->
-<div class="card fade">
-<h2>🔥 مميزات السيرفر</h2>
-<p>✔ Headshot Only</p>
-<p>✔ Anti-Cheat قوي</p>
-<p>✔ Ping منخفض</p>
-<p>✔ Admin Active</p>
+<div class="card">
+    <h2>🔥 مميزات السيرفر</h2>
+    <p>✔ Headshot Only</p>
+    <p>✔ Anti-Cheat قوي</p>
+    <p>✔ Ping منخفض</p>
+    <p>✔ Admin Active</p>
 </div>
 
-<!-- تواصل -->
-<div class="card fade">
-<h2>📱 تواصل معنا</h2>
+<div class="card">
+    <h2>📱 تواصل معنا</h2>
 
-<a class="btn" href="https://instagram.com/ya9inx" target="_blank">
-<i class="fab fa-instagram"></i> Instagram
-</a>
+    <a class="btn social" href="https://instagram.com/ya9inx" target="_blank">
+        <i class="fab fa-instagram"></i> Instagram
+    </a>
 
-<a class="btn" href="https://discord.gg/ya9inx" target="_blank">
-<i class="fab fa-discord"></i> Discord
-</a>
+    <a class="btn social" href="https://discord.gg/ya9inx" target="_blank">
+        <i class="fab fa-discord"></i> Discord
+    </a>
+</div>
 
 </div>
 
