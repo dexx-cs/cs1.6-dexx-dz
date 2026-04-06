@@ -3,19 +3,23 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>dexx community</title>
+<title>Dexx CS</title>
 
 <style>
+:root {
+    --main-color: red;
+}
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: Arial;
 }
 
 body {
     background: black;
     color: white;
-    font-family: Arial;
     text-align: center;
     overflow-x: hidden;
 }
@@ -26,9 +30,9 @@ body::before {
     position: fixed;
     width: 200%;
     height: 200%;
-    background-image: radial-gradient(red 1px, transparent 1px);
+    background-image: radial-gradient(var(--main-color) 1px, transparent 1px);
     background-size: 25px 25px;
-    animation: moveBg 20s linear infinite;
+    animation: moveBg 15s linear infinite;
     opacity: 0.2;
     z-index: -1;
 }
@@ -38,110 +42,139 @@ body::before {
     to {transform: translate(-200px,-200px);}
 }
 
-/* الصورة */
+/* بروفيل */
 .profile img {
-    width: 170px;
+    width: 160px;
     border-radius: 20px;
-    margin-top: 60px;
-    box-shadow: 0 0 25px red;
+    margin-top: 50px;
+    box-shadow: 0 0 25px var(--main-color);
 }
 
 /* الاسم */
 .name {
-    font-size: 42px;
-    margin-top: 20px;
-    letter-spacing: 2px;
+    font-size: 40px;
+    margin-top: 15px;
+    color: var(--main-color);
+    text-shadow: 0 0 10px var(--main-color);
 }
 
-.name span {
-    color: red;
-    text-shadow: 0 0 10px red;
+/* زر تغيير اللون */
+.color-btn {
+    margin: 20px;
+    padding: 12px 20px;
+    background: var(--main-color);
+    border: none;
+    color: white;
+    border-radius: 10px;
+    cursor: pointer;
 }
 
-/* الشكل */
-.shape {
-    width: 220px;
-    height: 220px;
-    background: red;
-    margin: 30px auto;
-    clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
-    box-shadow: 0 0 40px red;
+/* روابط */
+.links a {
+    display: inline-block;
+    margin: 10px;
+    padding: 12px 18px;
+    background: #111;
+    border-radius: 10px;
+    text-decoration: none;
+    color: var(--main-color);
+    border: 1px solid var(--main-color);
+    transition: 0.3s;
 }
 
-/* العنوان */
-.section h2 {
+.links a:hover {
+    background: var(--main-color);
+    color: white;
+}
+
+/* كروت */
+.cards {
     margin-top: 30px;
-    color: #ff4d4d;
 }
 
-/* الكروت */
 .card {
     background: #111;
     margin: 20px;
     padding: 20px;
     border-radius: 20px;
-    box-shadow: 0 0 20px red;
-    transition: 0.3s;
+    box-shadow: 0 0 20px var(--main-color);
+    transform: translateY(50px);
+    opacity: 0;
+    transition: 0.6s;
 }
 
-.card:hover {
-    transform: scale(1.05);
+.card.show {
+    transform: translateY(0);
+    opacity: 1;
 }
 
 .card h3 {
-    color: red;
+    color: var(--main-color);
 }
 
-/* أزرار */
-.buttons a {
-    display: inline-block;
-    margin: 10px;
-    padding: 12px 20px;
-    background: red;
-    color: white;
-    border-radius: 10px;
-    text-decoration: none;
-    transition: 0.3s;
+/* صور أنمي */
+.anime {
+    margin-top: 50px;
 }
 
-.buttons a:hover {
-    background: darkred;
+.anime img {
+    width: 90%;
+    max-width: 400px;
+    border-radius: 20px;
+    margin: 20px 0;
+    box-shadow: 0 0 20px var(--main-color);
 }
+
 </style>
-
 </head>
 
 <body>
 
 <div class="profile">
-    <img src="https://pin.it/33zwEYG7K">
+    <img src="https://images.unsplash.com/photo-1606112219348-204d7d8b94ee">
 </div>
 
-<div class="name">
-    dexx <span>cs</span>
-</div>
+<div class="name">dexx-cs</div>
 
-<div class="shape"></div>
+<button class="color-btn" onclick="changeColor()">لونك المفضل</button>
 
-<div class="buttons">
+<div class="links">
     <a href="https://www.instagram.com/ya9inx?igsh=MTB0bXJycmNzZWJq">Instagram</a>
-    <a href="https://discord.gg/2tawpwED">discord</a>
+    <a href="https://discord.gg/2tawpwED">Discord</a>
 </div>
 
-<div class="section">
-    <h2>مواقع من تطويري</h2>
-
-    <div class="card">
-        <h3>صوتيات القرآن</h3>
-        <p>تجربة استماع رائعة</p>
-    </div>
-
-    <div class="card">
-        <h3>Gaming Site</h3>
-        <p>أفضل ألعاب أونلاين</p>
-    </div>
-
+<div class="cards">
+    <div class="card">🔥 موقع Gaming رهيب</div>
+    <div class="card">💻 تطوير مواقع احترافية</div>
+    <div class="card">🎮 CS 1.6 Player</div>
 </div>
+
+<div class="anime">
+    <img src="https://wallpapercave.com/wp/wp8933851.jpg">
+    <img src="https://wallpapercave.com/wp/wp8933847.jpg">
+    <img src="https://wallpapercave.com/wp/wp8933843.jpg">
+</div>
+
+<script>
+
+/* تغيير اللون */
+function changeColor() {
+    const colors = ["red","blue","purple","cyan","lime","orange"];
+    const random = colors[Math.floor(Math.random() * colors.length)];
+    document.documentElement.style.setProperty('--main-color', random);
+}
+
+/* انيميشن عند النزول */
+window.addEventListener("scroll", () => {
+    document.querySelectorAll(".card").forEach(card => {
+        const top = card.getBoundingClientRect().top;
+        if(top < window.innerHeight - 50){
+            card.classList.add("show");
+        }
+    });
+});
+
+</script>
 
 </body>
 </html>
