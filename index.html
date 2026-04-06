@@ -7,7 +7,7 @@
 
 <style>
 :root {
-    --main-color: red;
+    --main-color: #ff003c;
 }
 
 * {
@@ -18,21 +18,32 @@
 }
 
 body {
-    background: black;
     color: white;
     text-align: center;
     overflow-x: hidden;
+    background: black;
 }
 
-/* خلفية نقاط متحركة */
+/* خلفية أنمي دارك */
 body::before {
+    content: "";
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: url('https://images.unsplash.com/photo-1618331835717-801e976710b2?w=1920') center/cover;
+    opacity: 0.15;
+    z-index: -2;
+}
+
+/* نقاط */
+body::after {
     content: "";
     position: fixed;
     width: 200%;
     height: 200%;
     background-image: radial-gradient(var(--main-color) 1px, transparent 1px);
     background-size: 25px 25px;
-    animation: moveBg 15s linear infinite;
+    animation: moveBg 20s linear infinite;
     opacity: 0.2;
     z-index: -1;
 }
@@ -42,63 +53,74 @@ body::before {
     to {transform: translate(-200px,-200px);}
 }
 
-/* بروفيل */
+/* صورة البروفيل */
 .profile img {
     width: 160px;
-    border-radius: 20px;
-    margin-top: 50px;
-    box-shadow: 0 0 25px var(--main-color);
+    border-radius: 50%;
+    margin-top: 60px;
+    box-shadow: 0 0 30px var(--main-color);
 }
 
 /* الاسم */
 .name {
-    font-size: 40px;
+    font-size: 45px;
     margin-top: 15px;
-    color: var(--main-color);
-    text-shadow: 0 0 10px var(--main-color);
+    font-weight: bold;
+    color: white;
+    text-shadow: 0 0 10px var(--main-color),
+                 0 0 20px var(--main-color),
+                 0 0 40px var(--main-color);
+    animation: glow 2s infinite alternate;
+}
+
+@keyframes glow {
+    from { text-shadow: 0 0 10px var(--main-color);}
+    to { text-shadow: 0 0 30px var(--main-color);}
+}
+
+/* أزرار احترافية */
+.buttons {
+    margin-top: 25px;
+}
+
+.buttons a {
+    display: inline-block;
+    margin: 10px;
+    padding: 14px 25px;
+    border-radius: 30px;
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    background: linear-gradient(45deg, #ff003c, #6a00ff);
+    box-shadow: 0 0 20px #ff003c;
+    transition: 0.4s;
+}
+
+.buttons a:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 40px #ff003c;
 }
 
 /* زر تغيير اللون */
 .color-btn {
-    margin: 20px;
-    padding: 12px 20px;
-    background: var(--main-color);
+    margin-top: 15px;
+    padding: 10px 20px;
     border: none;
+    border-radius: 20px;
+    background: var(--main-color);
     color: white;
-    border-radius: 10px;
     cursor: pointer;
 }
 
-/* روابط */
-.links a {
-    display: inline-block;
-    margin: 10px;
-    padding: 12px 18px;
-    background: #111;
-    border-radius: 10px;
-    text-decoration: none;
-    color: var(--main-color);
-    border: 1px solid var(--main-color);
-    transition: 0.3s;
-}
-
-.links a:hover {
-    background: var(--main-color);
-    color: white;
-}
-
 /* كروت */
-.cards {
-    margin-top: 30px;
-}
-
 .card {
-    background: #111;
-    margin: 20px;
-    padding: 20px;
+    background: rgba(0,0,0,0.6);
+    margin: 25px;
+    padding: 25px;
     border-radius: 20px;
+    backdrop-filter: blur(10px);
     box-shadow: 0 0 20px var(--main-color);
-    transform: translateY(50px);
+    transform: translateY(60px);
     opacity: 0;
     transition: 0.6s;
 }
@@ -108,21 +130,18 @@ body::before {
     opacity: 1;
 }
 
-.card h3 {
-    color: var(--main-color);
-}
-
 /* صور أنمي */
-.anime {
-    margin-top: 50px;
-}
-
 .anime img {
     width: 90%;
-    max-width: 400px;
+    max-width: 450px;
+    margin: 20px;
     border-radius: 20px;
-    margin: 20px 0;
-    box-shadow: 0 0 20px var(--main-color);
+    box-shadow: 0 0 25px var(--main-color);
+    transition: 0.4s;
+}
+
+.anime img:hover {
+    transform: scale(1.05);
 }
 
 </style>
@@ -131,40 +150,35 @@ body::before {
 <body>
 
 <div class="profile">
-    <img src="https://images.unsplash.com/photo-1606112219348-204d7d8b94ee">
+    <img src="https://share.google/29ZUXzJvkMULESPbB">
 </div>
 
 <div class="name">dexx-cs</div>
 
-<button class="color-btn" onclick="changeColor()">لونك المفضل</button>
-
-<div class="links">
+<div class="buttons">
     <a href="https://www.instagram.com/ya9inx?igsh=MTB0bXJycmNzZWJq">Instagram</a>
     <a href="https://discord.gg/2tawpwED">Discord</a>
 </div>
 
-<div class="cards">
-    <div class="card">🔥 موقع Gaming رهيب</div>
-    <div class="card">💻 تطوير مواقع احترافية</div>
-    <div class="card">🎮 CS 1.6 Player</div>
-</div>
+<button class="color-btn" onclick="changeColor()">لونك المفضل</button>
+
+<div class="card">🔥 Gaming Developer</div>
+<div class="card">🎮 CS 1.6 Player</div>
+<div class="card">💻 مواقع احترافية</div>
 
 <div class="anime">
-    <img src="https://wallpapercave.com/wp/wp8933851.jpg">
-    <img src="https://wallpapercave.com/wp/wp8933847.jpg">
-    <img src="https://wallpapercave.com/wp/wp8933843.jpg">
+    <img src="https://images.unsplash.com/photo-1606112219348-204d7d8b94ee?w=800">
+    <img src="https://images.unsplash.com/photo-1541560052-77ec1bbc09f7?w=800">
+    <img src="https://images.unsplash.com/photo-1621609764095-b32bbe35cf3a?w=800">
 </div>
 
 <script>
-
-/* تغيير اللون */
 function changeColor() {
-    const colors = ["red","blue","purple","cyan","lime","orange"];
+    const colors = ["#ff003c","#00f0ff","#6a00ff","#00ff88","#ffaa00"];
     const random = colors[Math.floor(Math.random() * colors.length)];
     document.documentElement.style.setProperty('--main-color', random);
 }
 
-/* انيميشن عند النزول */
 window.addEventListener("scroll", () => {
     document.querySelectorAll(".card").forEach(card => {
         const top = card.getBoundingClientRect().top;
@@ -173,7 +187,6 @@ window.addEventListener("scroll", () => {
         }
     });
 });
-
 </script>
 
 </body>
