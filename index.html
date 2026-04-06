@@ -4,127 +4,138 @@
 <meta charset="UTF-8">
 <title>CS 1.6 DZ</title>
 
+<!-- Icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
 <style>
+
 body {
-    margin: 0;
-    font-family: Arial;
-    color: white;
-    text-align: center;
-    overflow-x: hidden;
+  margin: 0;
+  font-family: Arial;
+  color: white;
+  text-align: center;
+  overflow-x: hidden;
 }
 
-/* VIDEO BACKGROUND */
-video {
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    z-index: -1;
+/* 🎥 فيديو خلفية */
+#bgVideo {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -2;
 }
 
-/* NAVBAR */
-.navbar {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    background: rgba(0,0,0,0.8);
-    padding: 10px;
-    color: #00ffe1;
-    font-weight: bold;
-    z-index: 1000;
-}
-
-/* overlay */
+/* غطاء */
 .overlay {
-    background: rgba(0,0,0,0.7);
-    min-height: 100vh;
-    padding-top: 70px;
+  background: rgba(0,0,0,0.6);
+  min-height: 100vh;
+  padding-top: 40px;
 }
 
-/* title */
+/* عنوان */
 h1 {
-    font-size: 45px;
-    color: #00ffe1;
-    text-shadow: 0 0 20px #00ffe1;
+  font-size: 40px;
+  color: #00ffcc;
+  text-shadow: 0 0 20px #00ffcc;
+  animation: glow 2s infinite alternate;
 }
 
-/* cards */
+@keyframes glow {
+  from { text-shadow: 0 0 10px #00ffcc; }
+  to { text-shadow: 0 0 30px #00ffcc; }
+}
+
+/* كارد */
 .card {
-    background: rgba(255,255,255,0.08);
-    backdrop-filter: blur(15px);
-    margin: 25px auto;
-    padding: 25px;
-    width: 320px;
-    border-radius: 20px;
-    box-shadow: 0 0 25px #00ffe1;
-    transition: 0.5s;
-    opacity: 0;
-    transform: translateY(50px);
+  background: rgba(255,255,255,0.05);
+  backdrop-filter: blur(10px);
+  margin: 20px auto;
+  padding: 20px;
+  width: 300px;
+  border-radius: 15px;
+  box-shadow: 0 0 20px #00ffcc;
+  transition: 0.3s;
 }
 
 .card:hover {
-    transform: scale(1.07);
+  transform: scale(1.05);
 }
 
-/* buttons */
+/* زر */
 .btn {
-    display: block;
-    margin: 12px auto;
-    padding: 12px;
-    width: 80%;
-    border-radius: 12px;
-    text-decoration: none;
-    font-weight: bold;
-    transition: 0.3s;
+  display: block;
+  margin: 10px auto;
+  padding: 12px;
+  border-radius: 10px;
+  text-decoration: none;
+  color: white;
+  background: #00ffcc;
+  transition: 0.3s;
 }
 
-/* join */
+.btn:hover {
+  background: #00ccaa;
+}
+
+/* زر Join */
 .join {
-    background: linear-gradient(45deg, red, orange);
-    box-shadow: 0 0 20px red;
+  background: red;
 }
 
 .join:hover {
-    transform: scale(1.15);
+  background: darkred;
 }
 
-/* socials */
-.insta {
-    background: linear-gradient(45deg,#ff00cc,#ff6600);
+/* أنيميشن دخول */
+.fade {
+  animation: fadeIn 2s ease;
 }
 
-.discord {
-    background: #5865F2;
+@keyframes fadeIn {
+  from {opacity: 0; transform: translateY(20px);}
+  to {opacity: 1; transform: translateY(0);}
 }
 
-/* players */
-.players {
-    margin-top: 10px;
-    color: #00ffe1;
-}
 </style>
 </head>
 
 <body>
 
-<!-- VIDEO -->
-<video autoplay muted loop>
-<source src="https://cdn.coverr.co/videos/coverr-gaming-keyboard-1605/1080p.mp4">
+<!-- 🎥 فيديو -->
+<video autoplay muted loop id="bgVideo">
+  <source src="https://cdn.coverr.co/videos/coverr-gaming-room-5179/1080p.mp4" type="video/mp4">
 </video>
 
-<!-- NAVBAR -->
-<div class="navbar">🔥 CS DZ SERVER</div>
+<!-- 🔊 صوت -->
+<audio autoplay>
+  <source src="https://www.myinstants.com/media/sounds/csgo-start.mp3">
+</audio>
 
 <div class="overlay">
 
 <h1>🔥 CS 1.6 DZ 🔥</h1>
 
-<div class="card">
+<!-- مرحبا -->
+<div class="card fade">
 <h2>🎮 مرحبا بيكم</h2>
 <p>أفضل سيرفر Counter Strike 1.6</p>
 </div>
 
-<div class="card">
+<!-- IP -->
+<div class="card fade">
+<h2>💻 IP Server</h2>
+<p>connect 94.23.78.29:27020</p>
+
+<a class="btn join" href="steam://connect/94.23.78.29:27020">
+🔥 Join Server
+</a>
+</div>
+
+<!-- مميزات -->
+<div class="card fade">
 <h2>🔥 مميزات السيرفر</h2>
 <p>✔ Headshot Only</p>
 <p>✔ Anti-Cheat قوي</p>
@@ -132,47 +143,21 @@ h1 {
 <p>✔ Admin Active</p>
 </div>
 
-<div class="card">
-<h2>🖥️ IP Server</h2>
-<p id="ip">connect 94.23.78.29:27020</p>
-
-<div class="players" id="players">👥 Players: 0/32</div>
-
-<a class="btn join" href="#" onclick="joinServer()">🔥 Join Server</a>
-</div>
-
-<div class="card">
+<!-- تواصل -->
+<div class="card fade">
 <h2>📱 تواصل معنا</h2>
 
-<a class="btn insta" id="insta" href="https://instagram.com/ya9inx" target="_blank">Instagram</a>
-<a class="btn discord" id="discord" href="https://discord.gg/ya9inx" target="_blank">Discord</a>
+<a class="btn" href="https://instagram.com/ya9inx" target="_blank">
+<i class="fab fa-instagram"></i> Instagram
+</a>
+
+<a class="btn" href="https://discord.gg/ya9inx" target="_blank">
+<i class="fab fa-discord"></i> Discord
+</a>
 
 </div>
 
 </div>
-
-<script>
-// animation scroll
-window.addEventListener("scroll", () => {
-  document.querySelectorAll(".card").forEach(card => {
-    card.style.opacity = "1";
-    card.style.transform = "translateY(0)";
-  });
-});
-
-// fake players
-setInterval(() => {
-  let num = Math.floor(Math.random() * 32);
-  document.getElementById("players").innerText = "👥 Players: " + num + "/32";
-}, 2000);
-
-// join
-function joinServer() {
-  navigator.clipboard.writeText("connect 94.23.78.29:27020");
-  alert("IP copied 😎");
-  window.location.href = "steam://connect/94.23.78.29:27020";
-}
-</script>
 
 </body>
 </html>
