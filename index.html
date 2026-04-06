@@ -2,92 +2,139 @@
 <html lang="ar">
 <head>
 <meta charset="UTF-8">
-<title>CS 1.6 DZ</title>
+<title>CS DZ SERVER</title>
 
-<!-- Icons -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 <style>
 
 body {
-    margin: 0;
-    font-family: Arial;
-    color: white;
-    text-align: center;
-    overflow-x: hidden;
+    margin:0;
+    font-family: 'Segoe UI', sans-serif;
+    color:white;
+    overflow:hidden;
 
-    /* 🔥 هنا الصورة تاعك */
-    background: url("dz.jpg") no-repeat center center fixed;
+    background: url("car.jpg") no-repeat center center fixed;
     background-size: cover;
 }
 
-/* طبقة تغميق */
+/* طبقة سوداء + تأثير */
 .overlay {
-    background: rgba(0,0,0,0.65);
-    min-height: 100vh;
-    padding: 40px;
+    background: radial-gradient(circle, rgba(0,0,0,0.6), rgba(0,0,0,0.95));
+    min-height:100vh;
+    padding:40px;
 }
 
-/* عنوان */
-h1 {
-    font-size: 50px;
-    color: #00ffc3;
-    text-shadow: 0 0 20px #00ffc3;
-    animation: glow 2s infinite alternate;
+/* لوقو */
+.logo {
+    font-size:55px;
+    font-weight:bold;
+    color:#00ffe0;
+    text-shadow:0 0 20px #00ffe0, 0 0 40px #00ffe0;
+    animation: neon 2s infinite alternate;
 }
 
-@keyframes glow {
-    from { text-shadow: 0 0 10px #00ffc3; }
-    to { text-shadow: 0 0 30px #00ffc3; }
+@keyframes neon {
+    from { text-shadow:0 0 10px #00ffe0; }
+    to { text-shadow:0 0 40px #00ffe0; }
 }
 
-/* الكارد */
+/* container */
+.container {
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:20px;
+}
+
+/* card glass */
 .card {
-    background: rgba(255,255,255,0.08);
-    margin: 20px auto;
-    padding: 20px;
-    width: 320px;
-    border-radius: 20px;
-    backdrop-filter: blur(10px);
-    box-shadow: 0 0 20px rgba(0,255,200,0.4);
-    transition: 0.3s;
+    width:350px;
+    padding:25px;
+    border-radius:20px;
+
+    background: rgba(255,255,255,0.05);
+    backdrop-filter: blur(15px);
+
+    box-shadow: 0 0 30px rgba(0,255,200,0.3);
+    transition:0.4s;
 }
 
 .card:hover {
-    transform: scale(1.05);
+    transform: translateY(-10px) scale(1.03);
+    box-shadow: 0 0 50px #00ffe0;
 }
 
-/* زر */
-.btn {
-    display: block;
-    margin: 10px auto;
-    padding: 12px;
-    border-radius: 30px;
-    text-decoration: none;
-    color: white;
-    font-weight: bold;
-    transition: 0.3s;
+/* IP */
+.ip {
+    font-size:18px;
+    color:#00ffe0;
 }
 
-/* زر Join */
+/* زر join */
 .join {
-    background: #ff3b3b;
-    box-shadow: 0 0 10px red;
+    margin-top:15px;
+    padding:12px;
+    border-radius:50px;
+    display:block;
+    text-decoration:none;
+    color:white;
+    font-weight:bold;
+
+    background: linear-gradient(45deg, #ff0000, #ff5e5e);
+    box-shadow:0 0 20px red;
+    transition:0.3s;
 }
 
 .join:hover {
-    background: #ff0000;
-    box-shadow: 0 0 20px red;
+    transform: scale(1.1);
+    box-shadow:0 0 40px red;
 }
 
-/* أزرار سوشيال */
+/* social */
+.socials {
+    display:flex;
+    gap:10px;
+    justify-content:center;
+}
+
 .social {
-    background: #00ffc3;
-    color: black;
+    flex:1;
+    padding:10px;
+    border-radius:30px;
+    text-decoration:none;
+    color:white;
+    font-weight:bold;
+
+    background:#00ffe0;
+    color:black;
+    transition:0.3s;
 }
 
 .social:hover {
-    background: #00cfa0;
+    transform: scale(1.1);
+    background:#00c9a7;
+}
+
+/* مميزات */
+.features p {
+    margin:6px;
+}
+
+/* animation دخول */
+.fade {
+    animation:fadeUp 1s ease;
+}
+
+@keyframes fadeUp {
+    from {
+        opacity:0;
+        transform: translateY(40px);
+    }
+    to {
+        opacity:1;
+        transform: translateY(0);
+    }
 }
 
 </style>
@@ -97,41 +144,47 @@ h1 {
 
 <div class="overlay">
 
-<h1>🔥 CS 1.6 DZ 🔥</h1>
+<div class="container">
 
-<div class="card">
-    <h2>🎮 مرحبا بكم</h2>
-    <p>أفضل سيرفر Counter Strike 1.6</p>
+<div class="logo fade">🔥 CS 1.6 DZ 🔥</div>
+
+<div class="card fade">
+    <h2>🎮 مرحبا بك</h2>
+    <p>أفضل سيرفر في الجزائر</p>
 </div>
 
-<div class="card">
-    <h2>💻 IP Server</h2>
-    <p>connect 94.23.78.29:27020</p>
+<div class="card fade">
+    <h2>💻 Server</h2>
+    <div class="ip">94.23.78.29:27020</div>
 
-    <!-- 🔥 زر يدخل مباشرة -->
-    <a class="btn join" href="steam://connect/94.23.78.29:27020">
-        🔥 Join Server
+    <a class="join" href="steam://connect/94.23.78.29:27020">
+        🔥 Join Now
     </a>
 </div>
 
-<div class="card">
-    <h2>🔥 مميزات السيرفر</h2>
+<div class="card features fade">
+    <h2>🔥 Features</h2>
     <p>✔ Headshot Only</p>
     <p>✔ Anti-Cheat قوي</p>
     <p>✔ Ping منخفض</p>
     <p>✔ Admin Active</p>
 </div>
 
-<div class="card">
-    <h2>📱 تواصل معنا</h2>
+<div class="card fade">
+    <h2>📱 تواصل</h2>
 
-    <a class="btn social" href="https://instagram.com/ya9inx" target="_blank">
-        <i class="fab fa-instagram"></i> Instagram
-    </a>
+    <div class="socials">
+        <a class="social" href="https://instagram.com/ya9inx" target="_blank">
+            <i class="fab fa-instagram"></i>
+        </a>
 
-    <a class="btn social" href="https://discord.gg/ya9inx" target="_blank">
-        <i class="fab fa-discord"></i> Discord
-    </a>
+        <a class="social" href="https://discord.gg/ya9inx" target="_blank">
+            <i class="fab fa-discord"></i>
+        </a>
+    </div>
+
+</div>
+
 </div>
 
 </div>
