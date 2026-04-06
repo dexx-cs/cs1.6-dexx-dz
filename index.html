@@ -10,40 +10,62 @@ body {
     font-family: Arial;
     color: white;
     text-align: center;
-    background: url("https://images.unsplash.com/photo-1605902711622-cfb43c44367f") no-repeat center center/cover;
+    background: url("https://images.unsplash.com/photo-1605902711622-cfb43c4437d1") no-repeat center/cover;
 }
 
+/* تأثير غامق */
 .overlay {
     background: rgba(0,0,0,0.7);
-    height: 100vh;
-    padding-top: 100px;
+    min-height: 100vh;
+    padding-top: 50px;
 }
 
+/* العنوان */
 h1 {
     font-size: 50px;
-    color: #00ffcc;
+    color: #00ffd5;
+    text-shadow: 0 0 20px #00ffd5;
 }
 
-.box {
+/* الكارد */
+.card {
     background: rgba(255,255,255,0.1);
-    padding: 20px;
+    backdrop-filter: blur(10px);
     margin: 20px auto;
+    padding: 20px;
     width: 300px;
     border-radius: 15px;
+    box-shadow: 0 0 15px #00ffd5;
+    transition: 0.3s;
 }
 
-a {
+.card:hover {
+    transform: scale(1.05);
+}
+
+/* الأزرار */
+.btn {
     display: block;
-    margin: 10px;
-    padding: 10px;
-    background: #00ffcc;
+    margin: 10px auto;
+    padding: 12px;
+    width: 80%;
+    border-radius: 10px;
+    background: linear-gradient(45deg,#00ffd5,#00aaff);
     color: black;
     text-decoration: none;
-    border-radius: 10px;
+    font-weight: bold;
+    transition: 0.3s;
 }
 
-a:hover {
-    background: #00ccaa;
+.btn:hover {
+    background: white;
+    transform: scale(1.1);
+}
+
+/* زر join */
+.join {
+    background: red;
+    color: white;
 }
 </style>
 </head>
@@ -51,23 +73,29 @@ a:hover {
 <body>
 
 <div class="overlay">
-    <h1>🔥 CS 1.6 DZ 🔥</h1>
 
-    <div class="box">
-        <h2>🎮 مرحبا بيكم</h2>
-        <p>أفضل سيرفر Counter Strike 1.6</p>
-    </div>
+<h1>🔥 CS 1.6 DZ 🔥</h1>
 
-    <div class="box">
-        <h3>📡 ip Server</h3>
-        <p>حط هنا IP تاعك</p>
-    </div>
+<div class="card">
+<h2>🎮 مرحبا بيكم</h2>
+<p>أفضل سيرفر Counter Strike 1.6</p>
+</div>
 
-    <div class="box">
-        <h3>📱 تواصل معنا</h3>
-        <a href="https://www.instagram.com/ya9inx?igsh=MTB0bXJycmNzZWJq">Instagram</a>
-        <a href="#">Discord</a>
-    </div>
+<div class="card">
+<h2>🖥️ IP Server</h2>
+<p>connect 123.123.123.123:27015</p>
+
+<a class="btn join" href="#">🔥 Join Server</a>
+</div>
+
+<div class="card">
+<h2>📱 تواصل معنا</h2>
+
+<a class="btn" href="https://instagram.com/ya9inx" target="_blank">Instagram</a>
+<a class="btn" href="https://discord.gg/ya9inx" target="_blank">Discord</a>
+
+</div>
+
 </div>
 
 </body>
