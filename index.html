@@ -12,39 +12,19 @@ body {
     font-family: Arial;
     color: white;
     text-align: center;
-    overflow: hidden;
     background: black;
+    overflow-x: hidden;
 }
 
-/* Loading */
-#loading {
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    background: black;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 30px;
-    z-index: 999;
-}
-
-/* خلفية */
+/* خلفية FULL */
 body::before {
     content: "";
     position: fixed;
     width: 100%;
     height: 100%;
-    background: url("https://wallpaperaccess.com/full/36626.jpg") no-repeat center;
-    background-size: cover;
-    animation: zoom 20s infinite alternate;
+    background: url("https://wallpaperaccess.com/full/8423563.jpg") no-repeat center center/cover;
     filter: brightness(0.4);
     z-index: -2;
-}
-
-@keyframes zoom {
-    from {transform: scale(1);}
-    to {transform: scale(1.2);}
 }
 
 /* particles */
@@ -57,39 +37,62 @@ canvas {
 
 /* الاسم */
 .title {
-    position: absolute;
-    top: 20px;
-    width: 100%;
+    margin-top: 40px;
     font-size: 70px;
-    animation: glow 2s infinite alternate;
+    font-weight: bold;
+    background: linear-gradient(90deg, cyan, purple, red);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shine 3s infinite linear;
 }
 
-@keyframes glow {
-    from {text-shadow: 0 0 10px red;}
-    to {text-shadow: 0 0 30px cyan;}
+@keyframes shine {
+    from {background-position: 0%;}
+    to {background-position: 200%;}
 }
 
-/* زر الموسيقى */
+/* زر موسيقى */
 .music-btn {
-    position: absolute;
+    position: fixed;
     top: 20px;
     right: 20px;
-    background: black;
+    background: rgba(0,0,0,0.7);
     border: 2px solid cyan;
-    padding: 10px 15px;
-    border-radius: 10px;
+    padding: 12px 18px;
+    border-radius: 12px;
     cursor: pointer;
 }
 
+/* الصور */
+.gallery {
+    margin-top: 50px;
+}
+
+.gallery img {
+    width: 220px;
+    margin: 10px;
+    border-radius: 15px;
+    transition: 0.3s;
+}
+
+.gallery img:hover {
+    transform: scale(1.1);
+}
+
 /* الأزرار */
+.buttons {
+    margin-top: 30px;
+}
+
 .btn {
     display: block;
-    width: 260px;
-    margin: 15px auto;
+    width: 280px;
+    margin: 12px auto;
     padding: 15px;
-    border-radius: 12px;
-    background: rgba(0,0,0,0.7);
-    border: 2px solid cyan;
+    border-radius: 15px;
+    background: rgba(255,255,255,0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.2);
     color: white;
     text-decoration: none;
     font-size: 18px;
@@ -106,26 +109,30 @@ canvas {
 
 <body>
 
-<!-- Loading -->
-<div id="loading">Loading Dexx-cs...</div>
-
-<!-- Canvas -->
-<canvas id="particles"></canvas>
-
 <!-- موسيقى -->
 <audio id="music" loop>
-    <source src="https://www.bensound.com/bensound-music/bensound-slowmotion.mp3">
+<source src="https://www.bensound.com/bensound-music/bensound-slowmotion.mp3">
 </audio>
+
+<div class="music-btn" onclick="toggleMusic()" id="musicBtn">
+<i class="fas fa-play"></i>
+</div>
 
 <div class="title">Dexx-cs</div>
 
-<!-- زر -->
-<div class="music-btn" onclick="toggleMusic()" id="musicBtn">
-    <i class="fas fa-play"></i>
+<!-- صور Jujutsu -->
+<div class="gallery">
+<img src="https://wallpaperaccess.com/full/8403895.jpg">
+<img src="https://wallpaperaccess.com/full/8403910.jpg">
+<img src="https://wallpaperaccess.com/full/8403930.jpg">
+<img src="https://wallpaperaccess.com/full/8403950.jpg">
+<img src="https://wallpaperaccess.com/full/8403970.jpg">
+<img src="https://wallpaperaccess.com/full/8403990.jpg">
 </div>
 
-<!-- أزرار -->
-<div style="margin-top:200px;">
+<!-- أزرار بزاف -->
+<div class="buttons">
+
 <a class="btn" href="https://discord.gg/YOUR-LINK" target="_blank">
 <i class="fab fa-discord"></i> Discord
 </a>
@@ -134,19 +141,28 @@ canvas {
 <i class="fab fa-instagram"></i> Instagram
 </a>
 
-<a class="btn" href="steam://connect/94.23.78.29:27020">
+<a class="btn" href="steam://connect/YOUR-IP">
 <i class="fas fa-gamepad"></i> Join Server
 </a>
+
+<a class="btn" href="https://youtube.com" target="_blank">
+<i class="fab fa-youtube"></i> YouTube
+</a>
+
+<a class="btn" href="https://tiktok.com" target="_blank">
+<i class="fab fa-tiktok"></i> TikTok
+</a>
+
+<a class="btn" href="https://facebook.com" target="_blank">
+<i class="fab fa-facebook"></i> Facebook
+</a>
+
 </div>
 
-<script>
-/* loading */
-window.onload = () => {
-    setTimeout(() => {
-        document.getElementById("loading").style.display = "none";
-    }, 2000);
-};
+<!-- particles -->
+<canvas id="particles"></canvas>
 
+<script>
 /* music */
 let music = document.getElementById("music");
 let btn = document.getElementById("musicBtn");
@@ -172,22 +188,20 @@ canvas.height = window.innerHeight;
 
 let particles = [];
 
-for (let i = 0; i < 80; i++) {
+for (let i = 0; i < 100; i++) {
     particles.push({
         x: Math.random() * canvas.width,
         y: Math.random() * canvas.height,
-        size: Math.random() * 3
+        size: Math.random() * 2
     });
-}
-
-function draw() {
+}function draw() {
     ctx.clearRect(0,0,canvas.width,canvas.height);
     particles.forEach(p => {
         ctx.fillStyle = "white";
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.size, 0, Math.PI*2);
         ctx.fill();
-        p.y += 0.5;
+        p.y += 0.4;
         if (p.y > canvas.height) p.y = 0;
     });
     requestAnimationFrame(draw);
