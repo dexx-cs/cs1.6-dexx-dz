@@ -1,192 +1,198 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dexx CS</title>
+<title>Dexx-cs</title>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 <style>
-:root {
-    --main-color: #ff003c;
-}
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: Arial;
-}
-
 body {
+    margin: 0;
+    font-family: Arial;
     color: white;
     text-align: center;
-    overflow-x: hidden;
+    overflow: hidden;
     background: black;
 }
 
-/* خلفية أنمي دارك */
+/* Loading */
+#loading {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+    z-index: 999;
+}
+
+/* خلفية */
 body::before {
     content: "";
     position: fixed;
     width: 100%;
     height: 100%;
-    background: url('https://images.unsplash.com/photo-1618331835717-801e976710b2?w=1920') center/cover;
-    opacity: 0.15;
+    background: url("https://wallpaperaccess.com/full/36626.jpg") no-repeat center;
+    background-size: cover;
+    animation: zoom 20s infinite alternate;
+    filter: brightness(0.4);
     z-index: -2;
 }
 
-/* نقاط */
-body::after {
-    content: "";
+@keyframes zoom {
+    from {transform: scale(1);}
+    to {transform: scale(1.2);}
+}
+
+/* particles */
+canvas {
     position: fixed;
-    width: 200%;
-    height: 200%;
-    background-image: radial-gradient(var(--main-color) 1px, transparent 1px);
-    background-size: 25px 25px;
-    animation: moveBg 20s linear infinite;
-    opacity: 0.2;
+    top: 0;
+    left: 0;
     z-index: -1;
 }
 
-@keyframes moveBg {
-    from {transform: translate(0,0);}
-    to {transform: translate(-200px,-200px);}
-}
-
-/* صورة البروفيل */
-.profile img {
-    width: 160px;
-    border-radius: 50%;
-    margin-top: 60px;
-    box-shadow: 0 0 30px var(--main-color);
-}
-
 /* الاسم */
-.name {
-    font-size: 45px;
-    margin-top: 15px;
-    font-weight: bold;
-    color: white;
-    text-shadow: 0 0 10px var(--main-color),
-                 0 0 20px var(--main-color),
-                 0 0 40px var(--main-color);
+.title {
+    position: absolute;
+    top: 20px;
+    width: 100%;
+    font-size: 70px;
     animation: glow 2s infinite alternate;
 }
 
 @keyframes glow {
-    from { text-shadow: 0 0 10px var(--main-color);}
-    to { text-shadow: 0 0 30px var(--main-color);}
+    from {text-shadow: 0 0 10px red;}
+    to {text-shadow: 0 0 30px cyan;}
 }
 
-/* أزرار احترافية */
-.buttons {
-    margin-top: 25px;
-}
-
-.buttons a {
-    display: inline-block;
-    margin: 10px;
-    padding: 14px 25px;
-    border-radius: 30px;
-    text-decoration: none;
-    color: white;
-    font-weight: bold;
-    background: linear-gradient(45deg, #ff003c, #6a00ff);
-    box-shadow: 0 0 20px #ff003c;
-    transition: 0.4s;
-}
-
-.buttons a:hover {
-    transform: scale(1.1);
-    box-shadow: 0 0 40px #ff003c;
-}
-
-/* زر تغيير اللون */
-.color-btn {
-    margin-top: 15px;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 20px;
-    background: var(--main-color);
-    color: white;
+/* زر الموسيقى */
+.music-btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: black;
+    border: 2px solid cyan;
+    padding: 10px 15px;
+    border-radius: 10px;
     cursor: pointer;
 }
 
-/* كروت */
-.card {
-    background: rgba(0,0,0,0.6);
-    margin: 25px;
-    padding: 25px;
-    border-radius: 20px;
-    backdrop-filter: blur(10px);
-    box-shadow: 0 0 20px var(--main-color);
-    transform: translateY(60px);
-    opacity: 0;
-    transition: 0.6s;
+/* الأزرار */
+.btn {
+    display: block;
+    width: 260px;
+    margin: 15px auto;
+    padding: 15px;
+    border-radius: 12px;
+    background: rgba(0,0,0,0.7);
+    border: 2px solid cyan;
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+    transition: 0.3s;
 }
 
-.card.show {
-    transform: translateY(0);
-    opacity: 1;
+.btn:hover {
+    background: cyan;
+    color: black;
+    transform: scale(1.1);
 }
-
-/* صور أنمي */
-.anime img {
-    width: 90%;
-    max-width: 450px;
-    margin: 20px;
-    border-radius: 20px;
-    box-shadow: 0 0 25px var(--main-color);
-    transition: 0.4s;
-}
-
-.anime img:hover {
-    transform: scale(1.05);
-}
-
 </style>
 </head>
 
 <body>
 
-<div class="profile">
-    <img src="https://share.google/29ZUXzJvkMULESPbB">
+<!-- Loading -->
+<div id="loading">Loading Dexx-cs...</div>
+
+<!-- Canvas -->
+<canvas id="particles"></canvas>
+
+<!-- موسيقى -->
+<audio id="music" loop>
+    <source src="https://www.bensound.com/bensound-music/bensound-slowmotion.mp3">
+</audio>
+
+<div class="title">Dexx-cs</div>
+
+<!-- زر -->
+<div class="music-btn" onclick="toggleMusic()" id="musicBtn">
+    <i class="fas fa-play"></i>
 </div>
 
-<div class="name">dexx-cs</div>
+<!-- أزرار -->
+<div style="margin-top:200px;">
+<a class="btn" href="https://discord.gg/YOUR-LINK" target="_blank">
+<i class="fab fa-discord"></i> Discord
+</a>
 
-<div class="buttons">
-    <a href="https://www.instagram.com/ya9inx?igsh=MTB0bXJycmNzZWJq">Instagram</a>
-    <a href="https://discord.gg/2tawpwED">Discord</a>
-</div>
+<a class="btn" href="https://instagram.com/YOUR-LINK" target="_blank">
+<i class="fab fa-instagram"></i> Instagram
+</a>
 
-<button class="color-btn" onclick="changeColor()">لونك المفضل</button>
-
-<div class="card">🔥 Gaming Developer</div>
-<div class="card">🎮 CS 1.6 Player</div>
-<div class="card">💻 مواقع احترافية</div>
-
-<div class="anime">
-    <img src="https://images.unsplash.com/photo-1606112219348-204d7d8b94ee?w=800">
-    <img src="https://images.unsplash.com/photo-1541560052-77ec1bbc09f7?w=800">
-    <img src="https://images.unsplash.com/photo-1621609764095-b32bbe35cf3a?w=800">
+<a class="btn" href="steam://connect/94.23.78.29:27020">
+<i class="fas fa-gamepad"></i> Join Server
+</a>
 </div>
 
 <script>
-function changeColor() {
-    const colors = ["#ff003c","#00f0ff","#6a00ff","#00ff88","#ffaa00"];
-    const random = colors[Math.floor(Math.random() * colors.length)];
-    document.documentElement.style.setProperty('--main-color', random);
+/* loading */
+window.onload = () => {
+    setTimeout(() => {
+        document.getElementById("loading").style.display = "none";
+    }, 2000);
+};
+
+/* music */
+let music = document.getElementById("music");
+let btn = document.getElementById("musicBtn");
+let playing = false;
+
+function toggleMusic() {
+    if (playing) {
+        music.pause();
+        btn.innerHTML = '<i class="fas fa-play"></i>';
+    } else {
+        music.play();
+        btn.innerHTML = '<i class="fas fa-pause"></i>';
+    }
+    playing = !playing;
 }
 
-window.addEventListener("scroll", () => {
-    document.querySelectorAll(".card").forEach(card => {
-        const top = card.getBoundingClientRect().top;
-        if(top < window.innerHeight - 50){
-            card.classList.add("show");
-        }
+/* particles */
+let canvas = document.getElementById("particles");
+let ctx = canvas.getContext("2d");
+
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+let particles = [];
+
+for (let i = 0; i < 80; i++) {
+    particles.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        size: Math.random() * 3
     });
-});
+}
+
+function draw() {
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    particles.forEach(p => {
+        ctx.fillStyle = "white";
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.size, 0, Math.PI*2);
+        ctx.fill();
+        p.y += 0.5;
+        if (p.y > canvas.height) p.y = 0;
+    });
+    requestAnimationFrame(draw);
+}
+draw();
 </script>
 
 </body>
