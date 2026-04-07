@@ -10,9 +10,9 @@
 body {
     margin: 0;
     font-family: Arial;
+    background: black;
     color: white;
     text-align: center;
-    background: black;    
     overflow-x: hidden;
 }
 
@@ -22,7 +22,7 @@ body::before {
     position: fixed;
     width: 100%;
     height: 100%;
-    background: url("guts.jpg") no-repeat center center/cover;
+    background: url("guts.jpg") no-repeat center/cover;
     filter: brightness(0.3);
     z-index: -2;
 }
@@ -35,80 +35,81 @@ canvas {
     z-index: -1;
 }
 
-/* اسم احترافي */
+/* الاسم */
 .title {
     margin-top: 30px;
-    font-size: 80px;
+    font-size: 90px;
     font-weight: bold;
-    letter-spacing: 4px;
+    letter-spacing: 5px;
     text-transform: uppercase;
-    text-shadow:
-        0 0 10px #fff,
-        0 0 20px #00f7ff,
-        0 0 40px #00f7ff,
-        0 0 80px #00f7ff;
+    animation: neon 2s infinite alternate;
 }
 
-/* زر موسيقى */
+@keyframes neon {
+    from {
+        text-shadow: 0 0 10px white, 0 0 20px cyan;
+    }
+    to {
+        text-shadow: 0 0 20px cyan, 0 0 40px purple, 0 0 80px cyan;
+    }
+}
+
+/* زر الموسيقى */
 .music-btn {
     position: fixed;
     top: 20px;
     right: 20px;
-    background: rgba(0,0,0,0.7);
-    border: 2px solid white;
-    padding: 12px 18px;
-    border-radius: 12px;
+    background: rgba(0,0,0,0.6);
+    border: 2px solid cyan;
+    padding: 12px;
+    border-radius: 10px;
     cursor: pointer;
+    font-size: 20px;
 }
 
 /* الصور */
 .gallery {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    display: flex;
+    overflow-x: auto;
     gap: 20px;
     padding: 40px;
 }
 
 .gallery img {
-    width: 300px;
-    height: 200px;
+    width: 320px;
+    height: 220px;
     object-fit: cover;
     border-radius: 20px;
     transition: 0.4s;
-    filter: brightness(0.7);
 }
 
 .gallery img:hover {
     transform: scale(1.2);
-    filter: brightness(1);
     box-shadow: 0 0 25px cyan;
 }
 
 /* الأزرار */
 .buttons {
-    margin: 30px;
+    margin-top: 20px;
 }
 
 .btn {
     display: block;
-    width: 280px;
-    margin: 12px auto;
+    width: 300px;
+    margin: 10px auto;
     padding: 15px;
     border-radius: 15px;
     background: rgba(255,255,255,0.1);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255,255,255,0.2);
     color: white;
     text-decoration: none;
-    font-size: 18px;
     transition: 0.3s;
 }
 
 .btn:hover {
     background: cyan;
     color: black;
-    transform: scale(1.1);
     box-shadow: 0 0 20px cyan;
+    transform: scale(1.1);
 }
 </style>
 </head>
@@ -117,7 +118,7 @@ canvas {
 
 <!-- موسيقى -->
 <audio id="music" loop preload="auto">
-<source src="https://www.bensound.com/bensound-music/bensound-slowmotion.mp3">
+<source src="kingvon.mp3" type="audio/mpeg">
 </audio>
 
 <div class="music-btn" onclick="toggleMusic()" id="musicBtn">
@@ -126,12 +127,21 @@ canvas {
 
 <div class="title">Dexx-cs</div>
 
-<!-- صورك -->
+<!-- صور -->
 <div class="gallery">
+
+<a href="guts.jpg" download>
 <img src="02bd2f6d01a138c4a9f28d3e23a318ac.jpg">
-<img src="03b249bbde5d6e51f84b8228ec990af0.jpg">
-<img src="1f23c54f08791490adbfc9d21b0cb4ca.jpg">
-<img src="37b44fc1b3d33a6e44272e798e01b61f.jpg">
+</a>
+
+<a href="me.jpg" download>
+<img src="4dba64afe082ccd3e68d993c05c867d7.jpg">
+</a>
+
+<a href="eye.jpg" download>
+<img src="2b994cabac6893431952a388bd108e27.jpg">
+</a>
+
 </div>
 
 <!-- أزرار -->
@@ -141,12 +151,9 @@ canvas {
 <i class="fab fa-discord"></i> Discord
 </a>
 
-<a class="btn" href="https://www.instagram.com/ya9inx?igsh=MTB0bXJycmNzZWJq" target="_blank">
+<a class="btn" href="
+https://www.instagram.com/ya9inx?igsh=MTB0bXJycmNzZWJq" target="_blank">
 <i class="fab fa-instagram"></i> Instagram
-</a>
-
-<a class="btn" href="steam://connect/94.23.78.29:27020">
-<i class="fas fa-gamepad"></i> Join Server
 </a>
 
 <a class="btn" href="https://youtube.com/@hits-peek?si=JeuCt0Sd_B1RrOkx" target="_blank">
@@ -155,6 +162,10 @@ canvas {
 
 <a class="btn" href="https://www.tiktok.com/@hitsxso2?_r=1&_t=ZS-95KwtRAxsvv" target="_blank">
 <i class="fab fa-tiktok"></i> TikTok
+</a>
+
+<a class="btn" href="connect 94.23.78.29:27020">
+<i class="fas fa-gamepad"></i> Join Server
 </a>
 
 </div>
@@ -178,10 +189,11 @@ function toggleMusic() {
     playing = !playing;
 }
 
-/* تشغيل تلقائي عند أول كليك */
+/* تشغيل أول ما تضغط */
 document.body.addEventListener("click", () => {
     if (!playing) {
         music.play();
+        music.volume = 0.3;
         playing = true;
         btn.innerHTML = '<i class="fas fa-pause"></i>';
     }
@@ -195,8 +207,7 @@ canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
 let particles = [];
-
-for (let i = 0; i < 100; i++) {
+for (let i = 0; i < 120; i++) {
     particles.push({
         x: Math.random() * canvas.width,
         y: Math.random() * canvas.height,
@@ -209,7 +220,7 @@ for (let i = 0; i < 100; i++) {
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.size, 0, Math.PI*2);
         ctx.fill();
-        p.y += 0.4;
+        p.y += 0.5;
         if (p.y > canvas.height) p.y = 0;
     });
     requestAnimationFrame(draw);
