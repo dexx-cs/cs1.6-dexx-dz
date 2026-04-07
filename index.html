@@ -16,14 +16,14 @@ body {
     overflow-x: hidden;
 }
 
-/* خلفية FULL */
+/* خلفية */
 body::before {
     content: "";
     position: fixed;
     width: 100%;
     height: 100%;
-    background: url("https://wallpaperaccess.com/full/8423563.jpg") no-repeat center center/cover;
-    filter: brightness(0.4);
+    background: url("guts.jpg") no-repeat center center/cover;
+    filter: brightness(0.3);
     z-index: -2;
 }
 
@@ -35,20 +35,18 @@ canvas {
     z-index: -1;
 }
 
-/* الاسم */
+/* اسم احترافي */
 .title {
-    margin-top: 40px;
-    font-size: 70px;
+    margin-top: 30px;
+    font-size: 80px;
     font-weight: bold;
-    background: linear-gradient(90deg, cyan, purple, red);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    animation: shine 3s infinite linear;
-}
-
-@keyframes shine {
-    from {background-position: 0%;}
-    to {background-position: 200%;}
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    text-shadow:
+        0 0 10px #fff,
+        0 0 20px #00f7ff,
+        0 0 40px #00f7ff,
+        0 0 80px #00f7ff;
 }
 
 /* زر موسيقى */
@@ -57,7 +55,7 @@ canvas {
     top: 20px;
     right: 20px;
     background: rgba(0,0,0,0.7);
-    border: 2px solid cyan;
+    border: 2px solid white;
     padding: 12px 18px;
     border-radius: 12px;
     cursor: pointer;
@@ -65,23 +63,30 @@ canvas {
 
 /* الصور */
 .gallery {
-    margin-top: 50px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    padding: 40px;
 }
 
 .gallery img {
-    width: 220px;
-    margin: 10px;
-    border-radius: 15px;
-    transition: 0.3s;
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 20px;
+    transition: 0.4s;
+    filter: grayscale(100%) contrast(120%);
 }
 
 .gallery img:hover {
     transform: scale(1.1);
+    filter: grayscale(0%);
+    box-shadow: 0 0 20px cyan;
 }
 
 /* الأزرار */
 .buttons {
-    margin-top: 30px;
+    margin: 30px;
 }
 
 .btn {
@@ -100,7 +105,7 @@ canvas {
 }
 
 .btn:hover {
-    background: cyan;
+    background: white;
     color: black;
     transform: scale(1.1);
 }
@@ -110,7 +115,7 @@ canvas {
 <body>
 
 <!-- موسيقى -->
-<audio id="music" loop>
+<audio id="music" loop preload="auto">
 <source src="https://www.bensound.com/bensound-music/bensound-slowmotion.mp3">
 </audio>
 
@@ -120,42 +125,34 @@ canvas {
 
 <div class="title">Dexx-cs</div>
 
-<!-- صور Jujutsu -->
+<!-- صورك -->
 <div class="gallery">
-
-<img src="https://wallpaperaccess.com/full/8403895.jpg">
-<img src="https://wallpaperaccess.com/full/8403910.jpg">
-<img src="https://wallpaperaccess.com/full/8403930.jpg">
-<img src="https://wallpaperaccess.com/full/8403950.jpg">
-<img src="https://wallpaperaccess.com/full/8403970.jpg">
-<img src="https://wallpaperaccess.com/full/8403990.jpg">
-
+<img src="guts.jpg">
+<img src="me.jpg">
+<img src="eye.jpg">
 </div>
-<!-- أزرار بزاف -->
+
+<!-- أزرار -->
 <div class="buttons">
 
-<a class="btn" href="https://discord.gg/YOUR-LINK" target="_blank">
+<a class="btn" href="https://discord.gg/2tawpwED" target="_blank">
 <i class="fab fa-discord"></i> Discord
 </a>
 
-<a class="btn" href="https://instagram.com/YOUR-LINK" target="_blank">
+<a class="btn" href="https://www.instagram.com/ya9inx?igsh=MTB0bXJycmNzZWJq" target="_blank">
 <i class="fab fa-instagram"></i> Instagram
 </a>
 
-<a class="btn" href="steam://connect/YOUR-IP">
+<a class="btn" href="steam://connect/94.23.78.29:27020">
 <i class="fas fa-gamepad"></i> Join Server
 </a>
 
-<a class="btn" href="https://youtube.com" target="_blank">
+<a class="btn" href="https://youtube.com/@hits-peek?si=JeuCt0Sd_B1RrOkx" target="_blank">
 <i class="fab fa-youtube"></i> YouTube
 </a>
 
-<a class="btn" href="https://tiktok.com" target="_blank">
+<a class="btn" href="https://www.tiktok.com/@hitsxso2?_r=1&_t=ZS-95KwtRAxsvv" target="_blank">
 <i class="fab fa-tiktok"></i> TikTok
-</a>
-
-<a class="btn" href="https://facebook.com" target="_blank">
-<i class="fab fa-facebook"></i> Facebook
 </a>
 
 </div>
@@ -164,7 +161,6 @@ canvas {
 <canvas id="particles"></canvas>
 
 <script>
-/* music */
 let music = document.getElementById("music");
 let btn = document.getElementById("musicBtn");
 let playing = false;
@@ -179,6 +175,15 @@ function toggleMusic() {
     }
     playing = !playing;
 }
+
+/* تشغيل تلقائي عند أول كليك */
+document.body.addEventListener("click", () => {
+    if (!playing) {
+        music.play();
+        playing = true;
+        btn.innerHTML = '<i class="fas fa-pause"></i>';
+    }
+});
 
 /* particles */
 let canvas = document.getElementById("particles");
