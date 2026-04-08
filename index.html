@@ -37,9 +37,15 @@ body {
     to { text-shadow: 0 0 40px cyan, 0 0 80px purple; }
 }
 
-/* سكشن */
-.section {
-    margin-top: 40px;
+/* زر موسيقى */
+.music-btn {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    border: 2px solid cyan;
+    padding: 10px;
+    border-radius: 10px;
+    cursor: pointer;
 }
 
 /* صور */
@@ -53,12 +59,6 @@ body {
 .gallery img {
     width: 250px;
     border-radius: 15px;
-    transition: 0.3s;
-}
-
-.gallery img:hover {
-    transform: scale(1.1);
-    box-shadow: 0 0 20px cyan;
 }
 
 /* تحميل */
@@ -81,11 +81,6 @@ body {
     color: white;
     text-decoration: none;
 }
-
-.btn:hover {
-    background: cyan;
-    color: black;
-}
 </style>
 </head>
 
@@ -93,39 +88,56 @@ body {
 
 <div class="bg"></div>
 
+<!-- موسيقى -->
+<audio id="music" loop>
+<source src="𝙶𝚃𝙰 𝙸𝚅 𝚃𝚑𝚎𝚖𝚎 [𝚂𝚕𝚘𝚠𝚎𝚍](M4A_128K).m4a">
+</audio>
+
+<div class="music-btn" onclick="toggleMusic()" id="btn">▶</div>
+
 <div class="title">Dexx-cs</div>
 
 <!-- صور -->
-<div class="section">
 <h2>Gallery</h2>
 <div class="gallery">
-<img src="img1.jpg">
-<img src="img2.jpg">
-<img src="img3.jpg">
-</div>
+<img src="02bd2f6d01a138c4a9f28d3e23a318ac.jpg">
+<img src="03b249bbde5d6e51f84b8228ec990af0.jpg">
+<img src="2b994cabac6893431952a388bd108e27.jpg">
 </div>
 
 <!-- تحميل -->
-<div class="section">
 <h2>Downloads</h2>
 
 <div class="download-card">
-<p>Config CS</p>
-<a href="file.zip" class="btn" download>Download</a>
+<p>CS 1.6 Game</p>
+<a href="cs16.zip" class="btn" download>Download</a>
 </div>
 
 <div class="download-card">
-<p>Pack</p>
-<a href="pack.rar" class="btn" download>Download</a>
-</div>
-
+<p>Skin Pack</p>
+<a href="skins.rar" class="btn" download>Download</a>
 </div>
 
 <!-- روابط -->
-<div class="section">
 <a class="btn" href="https://discord.gg/2tawpwED" target="_blank">Discord</a>
-<a class="btn" href="https://www.instagram.com/ya9inx" target="_blank">Instagram</a>
-</div>
+
+<script>
+let music = document.getElementById("music");
+let btn = document.getElementById("btn");
+let playing = false;
+
+function toggleMusic(){
+    if(playing){
+        music.pause();
+        btn.innerHTML = "▶";
+    }else{
+        music.play();
+        music.volume = 0.3;
+        btn.innerHTML = "⏸";
+    }
+    playing = !playing;
+}
+</script>
 
 </body>
 </html>
