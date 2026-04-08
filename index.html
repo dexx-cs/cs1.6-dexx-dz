@@ -10,13 +10,15 @@
 body {
     margin: 0;
     font-family: Arial;
+    background: black;
     color: white;
     text-align: center;
-    background: black;
+    overflow-x: hidden;
 }
 
 /* خلفية */
-.bg {
+body::before {
+    content: "";
     position: fixed;
     width: 100%;
     height: 100%;
@@ -25,118 +27,216 @@ body {
     z-index: -2;
 }
 
-/* عنوان */
+/* particles */
+canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: -1;
+}
+
+/* العنوان */
 .title {
-    margin-top: 40px;
-    font-size: 70px;
-    animation: glow 2s infinite alternate;
+    margin-top: 30px;
+    font-size: 80px;
+    font-weight: bold;
+    animation: neon 2s infinite alternate;
 }
 
-@keyframes glow {
+@keyframes neon {
     from { text-shadow: 0 0 10px cyan; }
-    to { text-shadow: 0 0 40px cyan, 0 0 80px purple; }
+    to { text-shadow: 0 0 40px purple, 0 0 80px cyan; }
 }
 
-/* زر موسيقى */
+/* زر الموسيقى */
 .music-btn {
     position: fixed;
     top: 20px;
     right: 20px;
     border: 2px solid cyan;
-    padding: 10px;
+    padding: 12px;
     border-radius: 10px;
     cursor: pointer;
 }
 
-/* صور */
+/* gallery */
 .gallery {
     display: flex;
     overflow-x: auto;
-    gap: 15px;
-    padding: 20px;
+    gap: 20px;
+    padding: 40px;
 }
 
 .gallery img {
-    width: 250px;
-    border-radius: 15px;
+    width: 300px;
+    height: 200px;
+    border-radius: 20px;
+    transition: 0.4s;
+}
+
+.gallery img:hover {
+    transform: scale(1.2);
+    box-shadow: 0 0 25px cyan;
 }
 
 /* تحميل */
+.downloads {
+    padding: 20px;
+}
+
 .download-card {
     margin: 15px auto;
-    width: 260px;
+    width: 300px;
     padding: 15px;
-    border-radius: 12px;
+    border-radius: 15px;
     background: rgba(255,255,255,0.1);
+    transition: 0.3s;
+}
+
+.download-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px cyan;
 }
 
 /* أزرار */
 .btn {
     display: block;
+    width: 300px;
     margin: 10px auto;
-    padding: 12px;
-    width: 220px;
-    border-radius: 10px;
+    padding: 15px;
+    border-radius: 15px;
     background: rgba(255,255,255,0.1);
     color: white;
     text-decoration: none;
+}
+
+.btn:hover {
+    background: cyan;
+    color: black;
+    box-shadow: 0 0 20px cyan;
 }
 </style>
 </head>
 
 <body>
 
-<div class="bg"></div>
-
-<!-- موسيقى -->
 <audio id="music" loop>
-<source src="𝙶𝚃𝙰 𝙸𝚅 𝚃𝚑𝚎𝚖𝚎 [𝚂𝚕𝚘𝚠𝚎𝚍](M4A_128K).m4a">
+<source src="music.m4a">
 </audio>
 
-<div class="music-btn" onclick="toggleMusic()" id="btn">▶</div>
+<div class="music-btn" onclick="toggleMusic()" id="musicBtn">
+<i class="fas fa-play"></i>
+</div>
 
 <div class="title">Dexx-cs</div>
 
 <!-- صور -->
-<h2>Gallery</h2>
-<div class="gallery">
-<img src="death.jpg">
-<img src="images.jpg">
-<img src="Hendrik on TikTok.jpg">
-</div>
+<div class="gallery" id="gallery"></div>
 
 <!-- تحميل -->
 <h2>Downloads</h2>
-
-<div class="download-card">
-<p>CS 1.6 Game</p>
-<a href="cstrike.exe" class="btn" download>Download</a>
-</div>
-
-<div class="download-card">
-<p>Skin Pack</p>
-<a href="skins.rar" class="btn" download>Download</a>
-</div>
+<div class="downloads" id="downloads"></div>
 
 <!-- روابط -->
 <a class="btn" href="https://discord.gg/2tawpwED" target="_blank">Discord</a>
+<a class="btn" href="https://www.instagram.com/ya9inx" target="_blank">Instagram</a>
+
+<canvas id="particles"></canvas>
 
 <script>
+
+/* 🔥 هنا تتحكم في كلش */
+const data = {
+    images: [
+        "img1.jpg",
+        "img2.jpg",
+        "img3.jpg"
+    ],
+
+    downloads: [
+        {
+            name: "Config CS",
+            link: "file.zip"
+        },
+        {
+            name: "My Pack",
+            link: "pack.rar"
+        }
+    ]
+};
+
+/* صور */
+let gallery = document.getElementById("gallery");
+
+data.images.forEach(img => {
+    let a = document.createElement("a");
+    a.href = img;
+    a.download = "";
+
+    let image = document.createElement("img");
+    image.src = img;
+
+    a.appendChild(image);
+    gallery.appendChild(a);
+});
+
+/* تحميل */
+let downloads = document.getElementById("downloads");
+
+data.downloads.forEach(file => {
+    let div = document.createElement("div");
+    div.className = "download-card";
+    div.innerHTML = 
+        <h3>${file.name}</h3>
+        <a href="${file.link}" class="btn" download>Download</a>
+    ;
+    downloads.appendChild(div);
+});
+
+/* موسيقى */
 let music = document.getElementById("music");
-let btn = document.getElementById("btn");
+let btn = document.getElementById("musicBtn");
 let playing = false;
 
-function toggleMusic(){
-    if(playing){
+function toggleMusic() {
+    if (playing) {
         music.pause();
-        btn.innerHTML = "▶";
-    }else{
+        btn.innerHTML = '<i class="fas fa-play"></i>';
+    } else {
         music.play();
-        music.volume = 0.3;
-        btn.innerHTML = "⏸";
+        btn.innerHTML = '<i class="fas fa-pause"></i>';
     }
     playing = !playing;
 }
+
+/* particles */
+let canvas = document.getElementById("particles");
+let ctx = canvas.getContext("2d");
+
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;let particles = [];
+for (let i = 0; i < 100; i++) {
+    particles.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        size: Math.random() * 2
+    });
+}
+
+function draw() {
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    particles.forEach(p => {
+        ctx.fillStyle = "white";
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.size, 0, Math.PI*2);
+        ctx.fill();
+        p.y += 0.5;
+        if (p.y > canvas.height) p.y = 0;
+    });
+    requestAnimationFrame(draw);
+}
+draw();
+
 </script>
 
 </body>
