@@ -234,3 +234,30 @@ draw();
 
 </body>
 </html>
+let particles = [];
+for (let i = 0; i < 100; i++) {
+    particles.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        size: Math.random() * 2
+    });
+}
+
+function draw() {
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    particles.forEach(p => {
+        ctx.fillStyle = "white";
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.size, 0, Math.PI*2);
+        ctx.fill();
+        p.y += 0.5;
+        if (p.y > canvas.height) p.y = 0;
+    });
+    requestAnimationFrame(draw);
+}
+draw();
+
+</script>
+
+</body>
+</html>
