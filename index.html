@@ -10,15 +10,13 @@
 body {
     margin: 0;
     font-family: Arial;
-    background: black;
     color: white;
     text-align: center;
-    overflow-x: hidden;
+    background: black;
 }
 
 /* خلفية */
-body::before {
-    content: "";
+.bg {
     position: fixed;
     width: 100%;
     height: 100%;
@@ -27,84 +25,58 @@ body::before {
     z-index: -2;
 }
 
-/* particles */
-canvas {
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: -1;
-}
-
-/* العنوان */
+/* عنوان */
 .title {
-    margin-top: 30px;
-    font-size: 80px;
-    font-weight: bold;
-    animation: neon 2s infinite alternate;
+    margin-top: 40px;
+    font-size: 70px;
+    animation: glow 2s infinite alternate;
 }
 
-@keyframes neon {
+@keyframes glow {
     from { text-shadow: 0 0 10px cyan; }
-    to { text-shadow: 0 0 40px purple, 0 0 80px cyan; }
+    to { text-shadow: 0 0 40px cyan, 0 0 80px purple; }
 }
 
-/* زر الموسيقى */
-.music-btn {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    border: 2px solid cyan;
-    padding: 12px;
-    border-radius: 10px;
-    cursor: pointer;
+/* سكشن */
+.section {
+    margin-top: 40px;
 }
 
-/* gallery */
+/* صور */
 .gallery {
     display: flex;
     overflow-x: auto;
-    gap: 20px;
-    padding: 40px;
-}
-
-.gallery img {
-    width: 300px;
-    height: 200px;
-    border-radius: 20px;
-    transition: 0.4s;
-}
-
-.gallery img:hover {
-    transform: scale(1.2);
-    box-shadow: 0 0 25px cyan;
-}
-
-/* تحميل */
-.downloads {
+    gap: 15px;
     padding: 20px;
 }
 
-.download-card {
-    margin: 15px auto;
-    width: 300px;
-    padding: 15px;
+.gallery img {
+    width: 250px;
     border-radius: 15px;
-    background: rgba(255,255,255,0.1);
     transition: 0.3s;
 }
 
-.download-card:hover {
-    transform: scale(1.05);
+.gallery img:hover {
+    transform: scale(1.1);
     box-shadow: 0 0 20px cyan;
+}
+
+/* تحميل */
+.download-card {
+    margin: 15px auto;
+    width: 260px;
+    padding: 15px;
+    border-radius: 12px;
+    background: rgba(255,255,255,0.1);
 }
 
 /* أزرار */
 .btn {
     display: block;
-    width: 300px;
     margin: 10px auto;
-    padding: 15px;
-    border-radius: 15px;
+    padding: 12px;
+    width: 220px;
+    border-radius: 10px;
     background: rgba(255,255,255,0.1);
     color: white;
     text-decoration: none;
@@ -113,133 +85,47 @@ canvas {
 .btn:hover {
     background: cyan;
     color: black;
-    box-shadow: 0 0 20px cyan;
 }
 </style>
 </head>
 
 <body>
 
-<audio id="music" loop>
-<source src="music.m4a">
-</audio>
-
-<div class="music-btn" onclick="toggleMusic()" id="musicBtn">
-<i class="fas fa-play"></i>
-</div>
+<div class="bg"></div>
 
 <div class="title">Dexx-cs</div>
 
 <!-- صور -->
-<div class="gallery" id="gallery"></div>
+<div class="section">
+<h2>Gallery</h2>
+<div class="gallery">
+<img src="img1.jpg">
+<img src="img2.jpg">
+<img src="img3.jpg">
+</div>
+</div>
 
 <!-- تحميل -->
+<div class="section">
 <h2>Downloads</h2>
-<div class="downloads" id="downloads"></div>
+
+<div class="download-card">
+<p>Config CS</p>
+<a href="file.zip" class="btn" download>Download</a>
+</div>
+
+<div class="download-card">
+<p>Pack</p>
+<a href="pack.rar" class="btn" download>Download</a>
+</div>
+
+</div>
 
 <!-- روابط -->
+<div class="section">
 <a class="btn" href="https://discord.gg/2tawpwED" target="_blank">Discord</a>
 <a class="btn" href="https://www.instagram.com/ya9inx" target="_blank">Instagram</a>
-
-<canvas id="particles"></canvas>
-
-<script>
-
-/* 🔥 هنا تتحكم في كلش */
-const data = {
-    images: [
-        "img1.jpg",
-        "img2.jpg",
-        "img3.jpg"
-    ],
-
-    downloads: [
-        {
-            name: "Config CS",
-            link: "file.zip"
-        },
-        {
-            name: "My Pack",
-            link: "pack.rar"
-        }
-    ]
-};
-
-/* صور */
-let gallery = document.getElementById("gallery");
-
-data.images.forEach(img => {
-    let a = document.createElement("a");
-    a.href = img;
-    a.download = "";
-
-    let image = document.createElement("img");
-    image.src = img;
-
-    a.appendChild(image);
-    gallery.appendChild(a);
-});
-
-/* تحميل */
-let downloads = document.getElementById("downloads");
-
-data.downloads.forEach(file => {
-    let div = document.createElement("div");
-    div.className = "download-card";
-    div.innerHTML = 
-        <h3>${file.name}</h3>
-        <a href="${file.link}" class="btn" download>Download</a>
-    ;
-    downloads.appendChild(div);
-});
-
-/* موسيقى */
-let music = document.getElementById("music");
-let btn = document.getElementById("musicBtn");
-let playing = false;
-
-function toggleMusic() {
-    if (playing) {
-        music.pause();
-        btn.innerHTML = '<i class="fas fa-play"></i>';
-    } else {
-        music.play();
-        btn.innerHTML = '<i class="fas fa-pause"></i>';
-    }
-    playing = !playing;
-}
-
-/* particles */
-let canvas = document.getElementById("particles");
-let ctx = canvas.getContext("2d");
-
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
-
-let particles = [];
-for (let i = 0; i < 100; i++) {
-    particles.push({
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height,
-        size: Math.random() * 2
-    });
-}
-
-function draw() {
-    ctx.clearRect(0,0,canvas.width,canvas.height);
-    particles.forEach(p => {
-        ctx.fillStyle = "white";
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.size, 0, Math.PI*2);
-        ctx.fill();
-        p.y += 0.5;
-        if (p.y > canvas.height) p.y = 0;
-    });
-    requestAnimationFrame(draw);
-}
-draw();
-
-</script>
+</div>
 
 </body>
 </html>
