@@ -35,23 +35,17 @@ canvas {
     z-index: -1;
 }
 
-/* الاسم */
+/* العنوان */
 .title {
     margin-top: 30px;
-    font-size: 90px;
+    font-size: 80px;
     font-weight: bold;
-    letter-spacing: 5px;
-    text-transform: uppercase;
     animation: neon 2s infinite alternate;
 }
 
 @keyframes neon {
-    from {
-        text-shadow: 0 0 10px white, 0 0 20px cyan;
-    }
-    to {
-        text-shadow: 0 0 20px cyan, 0 0 40px purple, 0 0 80px cyan;
-    }
+    from { text-shadow: 0 0 10px cyan; }
+    to { text-shadow: 0 0 40px purple, 0 0 80px cyan; }
 }
 
 /* زر الموسيقى */
@@ -59,15 +53,13 @@ canvas {
     position: fixed;
     top: 20px;
     right: 20px;
-    background: rgba(0,0,0,0.6);
     border: 2px solid cyan;
     padding: 12px;
     border-radius: 10px;
     cursor: pointer;
-    font-size: 20px;
 }
 
-/* الصور */
+/* gallery */
 .gallery {
     display: flex;
     overflow-x: auto;
@@ -76,9 +68,8 @@ canvas {
 }
 
 .gallery img {
-    width: 320px;
-    height: 220px;
-    object-fit: cover;
+    width: 300px;
+    height: 200px;
     border-radius: 20px;
     transition: 0.4s;
 }
@@ -88,11 +79,26 @@ canvas {
     box-shadow: 0 0 25px cyan;
 }
 
-/* الأزرار */
-.buttons {
-    margin-top: 20px;
+/* تحميل */
+.downloads {
+    padding: 20px;
 }
 
+.download-card {
+    margin: 15px auto;
+    width: 300px;
+    padding: 15px;
+    border-radius: 15px;
+    background: rgba(255,255,255,0.1);
+    transition: 0.3s;
+}
+
+.download-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px cyan;
+}
+
+/* أزرار */
 .btn {
     display: block;
     width: 300px;
@@ -102,23 +108,20 @@ canvas {
     background: rgba(255,255,255,0.1);
     color: white;
     text-decoration: none;
-    transition: 0.3s;
 }
 
 .btn:hover {
     background: cyan;
     color: black;
     box-shadow: 0 0 20px cyan;
-    transform: scale(1.1);
 }
 </style>
 </head>
 
 <body>
 
-<!-- موسيقى -->
-<audio id="music" loop preload="auto">
-<source src="𝙶𝚃𝙰 𝙸𝚅 𝚃𝚑𝚎𝚖𝚎 [𝚂𝚕𝚘𝚠𝚎𝚍](M4A_128K).m4a" type="audio/mpeg">
+<audio id="music" loop>
+<source src="music.m4a">
 </audio>
 
 <div class="music-btn" onclick="toggleMusic()" id="musicBtn">
@@ -128,56 +131,69 @@ canvas {
 <div class="title">Dexx-cs</div>
 
 <!-- صور -->
-<div class="gallery">
+<div class="gallery" id="gallery"></div>
 
-<a href="guts.jpg" download>
-<img src="02bd2f6d01a138c4a9f28d3e23a318ac.jpg">
-</a>
-    
-<a href="guts.jpg" download>
-<img src="03b249bbde5d6e51f84b8228ec990af0.jpg">
-</a>
+<!-- تحميل -->
+<h2>Downloads</h2>
+<div class="downloads" id="downloads"></div>
 
-<a href="me.jpg" download>
-<img src="4dba64afe082ccd3e68d993c05c867d7.jpg">
-</a>
+<!-- روابط -->
+<a class="btn" href="https://discord.gg/2tawpwED" target="_blank">Discord</a>
+<a class="btn" href="https://www.instagram.com/ya9inx" target="_blank">Instagram</a>
 
-<a href="eye.jpg" download>
-<img src="2b994cabac6893431952a388bd108e27.jpg">
-</a>
-
-</div>
-
-<!-- أزرار -->
-<div class="buttons">
-
-<a class="btn" href="https://discord.gg/2tawpwED" target="_blank">
-<i class="fab fa-discord"></i> Discord
-</a>
-
-<a class="btn" href="
-https://www.instagram.com/ya9inx?igsh=MTB0bXJycmNzZWJq" target="_blank">
-<i class="fab fa-instagram"></i> Instagram
-</a>
-
-<a class="btn" href="https://youtube.com/@hits-peek?si=JeuCt0Sd_B1RrOkx" target="_blank">
-<i class="fab fa-youtube"></i> YouTube
-</a>
-
-<a class="btn" href="https://www.tiktok.com/@hitsxso2?_r=1&_t=ZS-95KwtRAxsvv" target="_blank">
-<i class="fab fa-tiktok"></i> TikTok
-</a>
-
-<a class="btn" href="connect 94.23.78.29:27020">
-<i class="fas fa-gamepad"></i> Join Server
-</a>
-
-</div>
-
-<!-- particles -->
 <canvas id="particles"></canvas>
 
 <script>
+
+/* 🔥 هنا تتحكم في كلش */
+const data = {
+    images: [
+        "img1.jpg",
+        "img2.jpg",
+        "img3.jpg"
+    ],
+
+    downloads: [
+        {
+            name: "Config CS",
+            link: "file.zip"
+        },
+        {
+            name: "My Pack",
+            link: "pack.rar"
+        }
+    ]
+};
+
+/* صور */
+let gallery = document.getElementById("gallery");
+
+data.images.forEach(img => {
+    let a = document.createElement("a");
+    a.href = img;
+    a.download = "";
+
+    let image = document.createElement("img");
+    image.src = img;
+
+    a.appendChild(image);
+    gallery.appendChild(a);
+});
+
+/* تحميل */
+let downloads = document.getElementById("downloads");
+
+data.downloads.forEach(file => {
+    let div = document.createElement("div");
+    div.className = "download-card";
+    div.innerHTML = 
+        <h3>${file.name}</h3>
+        <a href="${file.link}" class="btn" download>Download</a>
+    ;
+    downloads.appendChild(div);
+});
+
+/* موسيقى */
 let music = document.getElementById("music");
 let btn = document.getElementById("musicBtn");
 let playing = false;
@@ -193,16 +209,6 @@ function toggleMusic() {
     playing = !playing;
 }
 
-/* تشغيل أول ما تضغط */
-document.body.addEventListener("click", () => {
-    if (!playing) {
-        music.play();
-        music.volume = 0.3;
-        playing = true;
-        btn.innerHTML = '<i class="fas fa-pause"></i>';
-    }
-});
-
 /* particles */
 let canvas = document.getElementById("particles");
 let ctx = canvas.getContext("2d");
@@ -210,30 +216,6 @@ let ctx = canvas.getContext("2d");
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
-let particles = [];
-for (let i = 0; i < 120; i++) {
-    particles.push({
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height,
-        size: Math.random() * 2
-    });
-}function draw() {
-    ctx.clearRect(0,0,canvas.width,canvas.height);
-    particles.forEach(p => {
-        ctx.fillStyle = "white";
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.size, 0, Math.PI*2);
-        ctx.fill();
-        p.y += 0.5;
-        if (p.y > canvas.height) p.y = 0;
-    });
-    requestAnimationFrame(draw);
-}
-draw();
-</script>
-
-</body>
-</html>
 let particles = [];
 for (let i = 0; i < 100; i++) {
     particles.push({
